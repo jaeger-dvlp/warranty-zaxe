@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'Mark';
+  src: url('./MARKPROEXTRALIGHT.OTF') format('opentype');
+  font-weight: 200 !important;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mark';
+  src: url('./MARKPROLIGHT.OTF') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mark';
+  src: url('./MARKPRO.OTF') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mark';
+  src: url('./MARKPROBOOK.OTF') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mark';
+  src: url('./MARKPROMEDIUM.OTF') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mark';
+  src: url('./MARKPROBOLD.OTF') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mark';
+  src: url('./MARKPROHEAVY.OTF') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mark';
+  src: url('./MARKPROBLACK.OTF') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
