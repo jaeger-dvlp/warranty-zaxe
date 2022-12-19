@@ -1,7 +1,8 @@
 import React from 'react';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
+import { useTranslation } from 'next-i18next';
+import WarrantyForm from '@/src/components/forms/WarrantyForm';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 function Home() {
   const { t } = useTranslation();
@@ -46,9 +47,9 @@ function Home() {
           href="https://warranty.zaxe.com"
         />
       </Head>
-      <section className="flex items-center justify-center w-full p-5 m-0 mt-10 font-zaxe">
+      <section className="flex items-center justify-center w-full p-5 m-0 my-5 font-zaxe">
         <section className="flex items-start justify-start w-full max-w-app">
-          <section className="grid w-full max-w-md grid-cols-1 p-5 xl:max-w-2xl lg:max-w-2xl place-content-start place-items-start ">
+          <section className="grid w-full max-w-md grid-cols-1 gap-2 p-5 xl:max-w-2xl lg:max-w-2xl place-content-start place-items-start ">
             <h1 className="text-xl font-semibold xl:text-3xl lg:text-3xl text-zinc-500">
               {t('pages.home.welcome.heading')}
             </h1>
@@ -58,10 +59,14 @@ function Home() {
           </section>
         </section>
       </section>
+      <section className="flex items-center justify-center w-full p-5 m-0">
+        <section className="flex items-center justify-center w-full p-0 max-w-app">
+          <WarrantyForm />
+        </section>
+      </section>
     </>
   );
 }
-
 export const getStaticProps = async ({ locale }) => ({
   props: {
     ...(await serverSideTranslations(locale, ['common'])),
