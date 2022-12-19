@@ -7,5 +7,13 @@
     "desc": {
       "home": "Start a warranty for your Zaxe 3D printer and rest easy. Protect your investment and ensure reliable performance."
     }
+  },
+  "pages": {
+    "home": {
+      "welcome": {
+        "heading": "Hello.",
+        "description": "By filling out this form, you will be able to follow the warranty period of your device and benefit from the current warranty coverage. This process is simple and straightforward, it only takes a few minutes."
+      }
+    }
   }
 }
