@@ -11,8 +11,42 @@
   "pages": {
     "home": {
       "welcome": {
-        "heading": "Merhaba.",
+        "heading": "Garantinizi Başlatın",
         "description": "Bu formu doldurarak cihazınızın garanti süresini takip edebilecek ve güncel garanti kapsamından yararlanabileceksiniz. Bu işlem basittir ve sadece birkaç dakika sürer."
+      }
+    }
+  },
+  "forms": {
+    "global": {
+      "inputs": {
+        "name": "İsim",
+        "surname": "Soyisim",
+        "email": "E-Posta Adresi",
+        "country": "Ülke"
+      },
+      "buttons": {
+        "submit": "Gönder",
+        "reset": "Sıfırla"
+      }
+    },
+    "warranty": {
+      "inputs": {
+        "company-name": "Şirket İsmi",
+        "serial-number": "Seri Numarası",
+        "distributor-name": "Distribütör İsmi"
+      }
+    }
+  },
+  "popups": {
+    "global": {
+      "success": {
+        "form-sent": "Form başarıyla gönderildi."
+      },
+      "errors": {
+        "invalid-field": "Geçersiz Alan."
+      },
+      "buttons": {
+        "ok": "Tamam"
       }
     }
   }

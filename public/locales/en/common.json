@@ -11,8 +11,42 @@
   "pages": {
     "home": {
       "welcome": {
-        "heading": "Hello.",
+        "heading": "Start Your Warranty",
         "description": "By filling out this form, you will be able to follow the warranty period of your device and benefit from the current warranty coverage. This process is simple and straightforward, it only takes a few minutes."
+      }
+    }
+  },
+  "forms": {
+    "global": {
+      "inputs": {
+        "name": "Name",
+        "surname": "Surname",
+        "email": "E-Mail Address",
+        "country": "Country"
+      },
+      "buttons": {
+        "submit": "Submit",
+        "reset": "Reset"
+      }
+    },
+    "warranty": {
+      "inputs": {
+        "company-name": "Company Name",
+        "serial-number": "Serial Number",
+        "distributor-name": "Distributor Name"
+      }
+    }
+  },
+  "popups": {
+    "global": {
+      "success": {
+        "form-sent": "Form sent successfully."
+      },
+      "errors": {
+        "invalid-field": "Invalid field."
+      },
+      "buttons": {
+        "ok": "Okay"
       }
     }
   }
