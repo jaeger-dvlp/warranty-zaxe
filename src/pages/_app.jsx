@@ -1,5 +1,6 @@
 import React from 'react';
 import '@/src/styles/globals.css';
+import '@/src/styles/fonts/fonts.css';
 import { appWithTranslation } from 'next-i18next';
 import nextI18nextConfig from '@/next-i18next.config';
 
