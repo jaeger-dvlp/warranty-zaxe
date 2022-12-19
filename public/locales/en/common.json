@@ -1,3 +1,11 @@
 {
-  "hey": "Hey."
+  "hey": "Hey.",
+  "meta": {
+    "title": {
+      "home": "Zaxe | Warranty Starter"
+    },
+    "desc": {
+      "home": "Start a warranty for your Zaxe 3D printer and rest easy. Protect your investment and ensure reliable performance."
+    }
+  }
 }

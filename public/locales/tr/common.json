@@ -1,3 +1,11 @@
 {
-  "hey": "Selam."
+  "hey": "Selam.",
+  "meta": {
+    "title": {
+      "home": "Zaxe | Garanti Başlatıcı"
+    },
+    "desc": {
+      "home": "Zaxe 3D yazıcınız için garanti başlatın ve rahat edin. Güvenilir performans sağlamak için yatırımınızı koruyun."
+    }
+  }
 }
