@@ -36,7 +36,7 @@ function Header() {
   );
 
   return (
-    <header className="flex flex-wrap items-center justify-center w-full p-5 m-0 bg-zinc-100">
+    <header className="flex flex-wrap items-center justify-center w-full p-5 m-0 font-zaxe bg-zinc-100">
       <nav className="flex flex-wrap items-center justify-between w-full p-5 bg-white border shadow-xl max-w-app rounded-xl border-zinc-100">
         <Link
           href="/"
