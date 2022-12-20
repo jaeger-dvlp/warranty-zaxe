@@ -97,7 +97,7 @@ function WarrantyForm() {
   };
 
   return (
-    <form className="grid w-full grid-cols-2 gap-5 p-5 bg-white border shadow-xl font-zaxe rounded-xl warranty-form border-zinc-100">
+    <form className="grid w-full grid-cols-2 gap-5 p-5 bg-white border shadow-xl fade-in font-zaxe rounded-xl warranty-form border-zinc-100">
       <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
         <input
           type="text"
