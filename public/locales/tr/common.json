@@ -11,8 +11,8 @@
   "pages": {
     "home": {
       "welcome": {
-        "heading": "Garantinizi Başlatın",
-        "description": "Bu formu doldurarak cihazınızın garanti süresini takip edebilecek ve güncel garanti kapsamından yararlanabileceksiniz. Bu işlem basittir ve sadece birkaç dakika sürer."
+        "heading": "Garantini Yönetici",
+        "description": "Bu uygulama ile garantilerinizi kolayca yönetebilirsiniz. Yeni garantiler başlatın, mevcutları düzenleyin ve yenilerini ekleyin, koruma durumunuzu güncel tutun. Uygulama, garantilerinizle ilgilenmek için ihtiyacınız olan tüm araçları sağlar."
       }
     }
   },
