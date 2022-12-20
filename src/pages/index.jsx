@@ -1,11 +1,24 @@
 import React from 'react';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
-import WarrantyForm from '@/src/components/forms/WarrantyForm';
+import { useAppContext } from '@/src/contexts/AppWrapper';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+import NavBar from '@/src/components/misc/NavBar';
+import List from '@/src/components/panels/List';
+import WarrantyForm from '@/src/components/forms/WarrantyForm';
 
 function Home() {
   const { t } = useTranslation();
+  const { activePanel } = useAppContext();
+  const Panels = [WarrantyForm, List];
+
+  const getActivePanel = (active) => {
+    const Panel = Panels[active];
+
+    return <Panel />;
+  };
+
   return (
     <>
       <Head>
@@ -61,7 +74,12 @@ function Home() {
       </section>
       <section className="flex items-center justify-center w-full p-5 m-0">
         <section className="flex items-center justify-center w-full p-0 max-w-app">
-          <WarrantyForm />
+          <NavBar />
+        </section>
+      </section>
+      <section className="flex items-center justify-center w-full p-5 m-0">
+        <section className="flex items-center justify-center w-full p-0 max-w-app">
+          {getActivePanel(activePanel)}
         </section>
       </section>
     </>
