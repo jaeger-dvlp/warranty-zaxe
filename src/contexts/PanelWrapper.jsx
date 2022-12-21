@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'next-i18next';
 import { BiAddToQueue, BiEdit, BiListUl } from 'react-icons/bi';
 
 import Edit from '@/src/components/panels/Edit';
