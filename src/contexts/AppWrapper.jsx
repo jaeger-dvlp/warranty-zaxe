@@ -3,7 +3,6 @@ import React from 'react';
 const AppContext = React.createContext();
 
 export default function AppWrapper({ children }) {
-  const [activePanel, setActivePanel] = React.useState(0);
   const [alertPopup, setAlertPopup] = React.useState({
     inHTML: false,
     isActive: false,
@@ -64,10 +63,8 @@ export default function AppWrapper({ children }) {
       activateAlertPopup,
       updateAlertPopup,
       deactivateAlertPopup,
-      activePanel,
-      setActivePanel,
     }),
-    [alertPopup, activePanel]
+    [alertPopup]
   );
 
   return (
