@@ -13,17 +13,17 @@ export default function PanelWrapper({ children }) {
   const [activePanel, setActivePanel] = React.useState(0);
   const [panels] = React.useState([
     {
-      name: t('components.navbar.buttons.add'),
+      name: 'components.navbar.buttons.add',
       icon: BiAddToQueue,
       component: WarrantyForm,
     },
     {
-      name: t('components.navbar.buttons.edit'),
+      name: 'components.navbar.buttons.edit',
       icon: BiEdit,
       component: Edit,
     },
     {
-      name: t('components.navbar.buttons.list'),
+      name: 'components.navbar.buttons.list',
       icon: BiListUl,
       component: List,
     },

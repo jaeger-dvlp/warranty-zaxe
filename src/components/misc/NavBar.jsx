@@ -1,6 +1,7 @@
 import React from 'react';
 import { BsKeyFill } from 'react-icons/bs';
 import { usePanelContext } from '@/src/contexts/PanelWrapper';
+import { useTranslation } from 'next-i18next';
 
 function NavBar() {
   const { activePanel, setActivePanel, panels } = usePanelContext();
@@ -22,6 +23,7 @@ function NavBar() {
 }
 
 function PageButtons({ pageContext: { panels, setActivePanel, activePanel } }) {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-wrap items-start justify-start w-full gap-5 max-w-fit">
       {panels.map(({ name, icon: Icon }, index) => (
@@ -36,7 +38,7 @@ function PageButtons({ pageContext: { panels, setActivePanel, activePanel } }) {
           type="button"
         >
           <Icon className="w-4 h-4" />
-          <span>{name}</span>
+          <span>{t(name)}</span>
         </button>
       ))}
     </div>
