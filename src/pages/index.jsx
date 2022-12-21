@@ -1,21 +1,17 @@
 import React from 'react';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
-import { useAppContext } from '@/src/contexts/AppWrapper';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import NavBar from '@/src/components/misc/NavBar';
-import List from '@/src/components/panels/List';
-import WarrantyForm from '@/src/components/forms/WarrantyForm';
-import Edit from '@/src/components/panels/Edit';
+import { usePageContext } from '../contexts/PageWrapper';
 
 function Home() {
   const { t } = useTranslation();
-  const { activePanel } = useAppContext();
-  const Panels = [WarrantyForm, Edit, List];
+  const { panels, activePanel } = usePageContext();
 
   const getActivePanel = (active) => {
-    const Panel = Panels[active];
+    const Panel = panels[active].component;
 
     return <Panel />;
   };
