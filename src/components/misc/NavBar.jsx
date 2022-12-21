@@ -1,9 +1,9 @@
 import React from 'react';
 import { BsKeyFill } from 'react-icons/bs';
-import { usePageContext } from '@/src/contexts/PageWrapper';
+import { usePanelContext } from '@/src/contexts/PanelWrapper';
 
 function NavBar() {
-  const { activePanel, setActivePanel, panels } = usePageContext();
+  const { activePanel, setActivePanel, panels } = usePanelContext();
 
   const pageContext = {
     activePanel,

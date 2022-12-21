@@ -4,11 +4,11 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import NavBar from '@/src/components/misc/NavBar';
-import { usePageContext } from '../contexts/PageWrapper';
+import { usePanelContext } from '../contexts/PanelWrapper';
 
 function Home() {
   const { t } = useTranslation();
-  const { panels, activePanel } = usePageContext();
+  const { panels, activePanel } = usePanelContext();
 
   const getActivePanel = (active) => {
     const Panel = panels[active].component;

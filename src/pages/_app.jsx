@@ -7,17 +7,17 @@ import Header from '@/src/components/misc/Header';
 import AppWrapper from '@/src/contexts/AppWrapper';
 import AlertPopup from '../components/popups/AlertPopup';
 import Loader from '../components/misc/Loader';
-import PageWrapper from '../contexts/PageWrapper';
+import PanelWrapper from '../contexts/PanelWrapper';
 
 function App({ Component, pageProps }) {
   return (
     <AppWrapper>
-      <PageWrapper>
+      <PanelWrapper>
         <Header />
         <Loader />
         <AlertPopup />
         <Component {...pageProps} />
-      </PageWrapper>
+      </PanelWrapper>
     </AppWrapper>
   );
 }

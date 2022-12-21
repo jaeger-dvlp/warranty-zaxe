@@ -6,9 +6,9 @@ import Edit from '@/src/components/panels/Edit';
 import List from '@/src/components/panels/List';
 import WarrantyForm from '@/src/components/forms/WarrantyForm';
 
-const PageContext = React.createContext();
+const PanelContext = React.createContext();
 
-export default function PageWrapper({ children }) {
+export default function PanelWrapper({ children }) {
   const { t } = useTranslation();
   const [activePanel, setActivePanel] = React.useState(0);
   const [panels] = React.useState([
@@ -35,8 +35,10 @@ export default function PageWrapper({ children }) {
   );
 
   return (
-    <PageContext.Provider value={ContextData}>{children}</PageContext.Provider>
+    <PanelContext.Provider value={ContextData}>
+      {children}
+    </PanelContext.Provider>
   );
 }
 
-export const usePageContext = () => React.useContext(PageContext);
+export const usePanelContext = () => React.useContext(PanelContext);
