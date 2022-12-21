@@ -13,7 +13,7 @@ function NavBar() {
 
   return (
     <div className="flex items-center justify-center w-full p-0 m-0">
-      <div className="flex items-center justify-between w-full gap-5 p-5 bg-white border shadow-xl font-zaxe rounded-xl nav-bar-container border-zinc-100">
+      <div className="flex flex-wrap items-center justify-between w-full gap-5 p-5 bg-white border shadow-xl font-zaxe rounded-xl nav-bar-container border-zinc-100">
         <PageButtons pageContext={pageContext} />
         <AuthButton />
       </div>
@@ -23,7 +23,7 @@ function NavBar() {
 
 function PageButtons({ pageContext: { panels, setActivePanel, activePanel } }) {
   return (
-    <div className="flex items-start justify-start w-full gap-5">
+    <div className="flex flex-wrap items-start justify-start w-full gap-5 max-w-fit">
       {panels.map(({ name, icon: Icon }, index) => (
         <button
           key={`button-${name.toLowerCase()}`}
