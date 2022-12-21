@@ -2,17 +2,19 @@ import React from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Countries from '@/src/data/countryStates.json';
-import FormService from '@/src/services/form.service';
 import { useAppContext } from '@/src/contexts/AppWrapper';
 
-const formPrefix = 'warranty-';
 const firstUpperCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 const Classes = {
   input: `w-full p-2 py-3 h-[3.5rem] peer transition-all duration-150 font-semibold bg-white border-2 rounded-md !outline-none !ring-2 ring-transparent focus:valid:ring-zaxe focus:invalid:ring-pink-400 text-zinc-600 !border-slate-200`,
   label: `absolute pointer-events-none top-0 px-2 py-0.5 font-semibold duration-150 scale-75 -translate-y-1/2 border rounded-md tranisition-all peer-placeholder-shown:border-transparent border-slate-200 peer-focus:scale-75 peer-placeholder-shown:scale-100 peer-focus:border-slate-200 text-slate-500 peer-focus:peer-valid:text-zaxe peer-focus:peer-invalid:text-pink-400 peer-focus:top-0 peer-placeholder-shown:top-7 peer-focus:-translate-x-[10%] max-w-[95%] -translate-x-[10%] peer-placeholder-shown:-translate-x-0 !left-2 placeholder-shown:bg-transparent peer-focus:bg-white bg-white`,
 };
 
-function WarrantyForm() {
+function DefaultForm({
+  onSubmit = () => null,
+  formName = 'a-default-form',
+  formPrefix = 'default',
+}) {
   const { t } = useTranslation();
   const { activateAlertPopup } = useAppContext();
   const [requestBody, setRequestBody] = React.useState({
@@ -35,17 +37,14 @@ function WarrantyForm() {
       serialNumber: requestBody.serialNumber,
       distributorName: requestBody.distributorName,
     };
-    FormService.sendWarrantyForm(body);
-    activateAlertPopup({
-      message: t('popups.global.success.form-sent'),
-      status: 'success',
-    });
+
+    onSubmit(body);
   };
 
   const HandleChange = (e) => {
     try {
       const { value } = e.target;
-      const field = e.target.id.replace(formPrefix, '');
+      const field = e.target.id.replace(`${formPrefix}-`, '');
       if (requestBody[field] !== undefined) {
         return setRequestBody({
           ...requestBody,
@@ -65,20 +64,18 @@ function WarrantyForm() {
   };
 
   React.useEffect(() => {
-    const theWarrantyForm = document.querySelector('.warranty-form');
+    const theForm = document.querySelector(`form.${formName}`);
 
-    if (theWarrantyForm)
-      theWarrantyForm.addEventListener('submit', HandleSubmit);
+    if (theForm) theForm.addEventListener('submit', HandleSubmit);
 
     return () => {
-      if (theWarrantyForm)
-        theWarrantyForm.removeEventListener('submit', HandleSubmit);
+      if (theForm) theForm.removeEventListener('submit', HandleSubmit);
     };
   }, [requestBody]);
 
   const resetForm = () => {
-    const inputs = document.querySelectorAll('.warranty-form input');
-    const selects = document.querySelectorAll('.warranty-form select');
+    const inputs = document.querySelectorAll(`form.${formName} input`);
+    const selects = document.querySelectorAll(`form.${formName} select`);
     inputs.forEach((input, i) => {
       inputs[i].value = '';
     });
@@ -97,12 +94,16 @@ function WarrantyForm() {
   };
 
   return (
-    <form className="grid w-full grid-cols-2 gap-5 p-5 bg-white border shadow-xl fade-in font-zaxe rounded-xl warranty-form border-zinc-100">
+    <form
+      autoComplete="on"
+      className={`grid ${formName} w-full grid-cols-2 gap-5`}
+    >
       <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
         <input
           type="text"
+          autoComplete="on"
           className={Classes.input}
-          id="warranty-name"
+          id={`${formPrefix}-name`}
           placeholder=" "
           pattern="\D{3,}"
           required
@@ -112,15 +113,16 @@ function WarrantyForm() {
             HandleChange(Event);
           }}
         />
-        <Label required htmlFor="warranty-name">
+        <Label required htmlFor={`${formPrefix}-name`}>
           {t('forms.global.inputs.name')}
         </Label>
       </section>
       <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
         <input
           type="text"
+          autoComplete="on"
           className={Classes.input}
-          id="warranty-surname"
+          id={`${formPrefix}-surname`}
           placeholder=" "
           pattern="\D{3,}"
           required
@@ -130,21 +132,22 @@ function WarrantyForm() {
             HandleChange(Event);
           }}
         />
-        <Label required htmlFor="warranty-surname">
+        <Label required htmlFor={`${formPrefix}-surname`}>
           {t('forms.global.inputs.surname')}
         </Label>
       </section>
       <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
         <input
           type="email"
+          autoComplete="on"
           className={Classes.input}
-          id="warranty-emailAddress"
+          id={`${formPrefix}-emailAddress`}
           placeholder=" "
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           required
           onChange={HandleChange}
         />
-        <Label required htmlFor="warranty-emailAddress">
+        <Label required htmlFor={`${formPrefix}-emailAddress`}>
           {t('forms.global.inputs.email')}
         </Label>
       </section>
@@ -152,7 +155,7 @@ function WarrantyForm() {
         <select
           required
           defaultValue=""
-          id="warranty-country"
+          id={`${formPrefix}-country`}
           onChange={HandleChange}
           className={`${Classes.input} min-h-[56px]`}
         >
@@ -161,7 +164,7 @@ function WarrantyForm() {
           </option>
           {Countries.map(({ name, emoji }) => (
             <option
-              key={`warranty-country-${name}`}
+              key={`${formPrefix}-country-${name}`}
               value={name}
             >{`${emoji} ${name}`}</option>
           ))}
@@ -170,24 +173,26 @@ function WarrantyForm() {
       <section className="relative w-full col-span-full">
         <input
           required
+          autoComplete="on"
           type="text"
           placeholder=" "
           pattern="\D{3,}"
-          id="warranty-companyName"
+          id={`${formPrefix}-companyName`}
           onChange={HandleChange}
           className={Classes.input}
         />
-        <Label required htmlFor="warranty-companyName">
-          {t('forms.warranty.inputs.company-name')}
+        <Label required htmlFor={`${formPrefix}-companyName`}>
+          {t('forms.global.inputs.company-name')}
         </Label>
       </section>
       <section className="relative w-full col-span-full">
         <input
           required
+          autoComplete="on"
           type="text"
           placeholder=" "
           pattern="\D{3,}"
-          id="warranty-serialNumber"
+          id={`${formPrefix}-serialNumber`}
           onChange={(e) => {
             const Event = e;
             Event.target.value = Event.target.value.toUpperCase();
@@ -195,22 +200,23 @@ function WarrantyForm() {
           }}
           className={Classes.input}
         />
-        <Label required htmlFor="warranty-serialNumber">
-          {t('forms.warranty.inputs.serial-number')}
+        <Label required htmlFor={`${formPrefix}-serialNumber`}>
+          {t('forms.global.inputs.serial-number')}
         </Label>
       </section>
       <section className="relative w-full col-span-full">
         <input
           required
+          autoComplete="on"
           type="text"
           placeholder=" "
           pattern="\D{3,}"
-          id="warranty-distributorName"
+          id={`${formPrefix}-distributorName`}
           onChange={HandleChange}
           className={Classes.input}
         />
-        <Label required htmlFor="warranty-distributorName">
-          {t('forms.warranty.inputs.distributor-name')}
+        <Label required htmlFor={`${formPrefix}-distributorName`}>
+          {t('forms.global.inputs.distributor-name')}
         </Label>
       </section>
       <section className="relative flex items-center justify-end w-full gap-3 col-span-full">
@@ -241,4 +247,4 @@ function Label({ htmlFor, required, children }) {
   );
 }
 
-export default WarrantyForm;
+export default DefaultForm;
