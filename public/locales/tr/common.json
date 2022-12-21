@@ -31,19 +31,15 @@
         "name": "İsim",
         "surname": "Soyisim",
         "email": "E-Posta Adresi",
-        "country": "Ülke"
-      },
-      "buttons": {
-        "submit": "Gönder",
-        "reset": "Sıfırla"
-      }
-    },
-    "warranty": {
-      "inputs": {
+        "country": "Ülke",
         "company-name": "Şirket İsmi",
         "serial-number": "Seri Numarası",
         "distributor-name": "Distribütör İsmi"
       }
+    },
+    "buttons": {
+      "submit": "Gönder",
+      "reset": "Sıfırla"
     }
   },
   "popups": {
