@@ -9,7 +9,6 @@ import WarrantyForm from '@/src/components/forms/WarrantyForm';
 const PanelContext = React.createContext();
 
 export default function PanelWrapper({ children }) {
-  const { t } = useTranslation();
   const [activePanel, setActivePanel] = React.useState(0);
   const [panels] = React.useState([
     {
