@@ -1,25 +1,14 @@
 import React from 'react';
-import { BiAddToQueue, BiListUl } from 'react-icons/bi';
-import { useAppContext } from '@/src/contexts/AppWrapper';
 import { BsKeyFill } from 'react-icons/bs';
+import { usePageContext } from '@/src/contexts/PageWrapper';
 
 function NavBar() {
-  const { activePanel, setActivePanel } = useAppContext();
-  const Pages = [
-    {
-      name: 'Add',
-      icon: BiAddToQueue,
-    },
-    {
-      name: 'List',
-      icon: BiListUl,
-    },
-  ];
+  const { activePanel, setActivePanel, panels } = usePageContext();
 
   const pageContext = {
     activePanel,
     setActivePanel,
-    Pages,
+    panels,
   };
 
   return (
@@ -32,10 +21,10 @@ function NavBar() {
   );
 }
 
-function PageButtons({ pageContext: { Pages, setActivePanel, activePanel } }) {
+function PageButtons({ pageContext: { panels, setActivePanel, activePanel } }) {
   return (
     <div className="flex items-start justify-start w-full gap-5">
-      {Pages.map(({ name, icon: Icon }, index) => (
+      {panels.map(({ name, icon: Icon }, index) => (
         <button
           key={`button-${name.toLowerCase()}`}
           onClick={() => setActivePanel(index)}
