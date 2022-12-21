@@ -3,11 +3,12 @@ import '@/src/styles/globals.css';
 import '@/src/styles/fonts/fonts.css';
 import { appWithTranslation } from 'next-i18next';
 
-import Header from '@/src/components/misc/Header';
 import AppWrapper from '@/src/contexts/AppWrapper';
-import AlertPopup from '../components/popups/AlertPopup';
-import Loader from '../components/misc/Loader';
-import PanelWrapper from '../contexts/PanelWrapper';
+import PanelWrapper from '@/src/contexts/PanelWrapper';
+
+import Header from '@/src/components/misc/Header';
+import Loader from '@/src/components/misc/Loader';
+import AlertPopup from '@/src/components/popups/AlertPopup';
 
 function App({ Component, pageProps }) {
   return (

@@ -7,7 +7,7 @@ class FormService {
   }
 
   async sendWarrantyForm(body) {
-    // this.api.post('/forms/warranty', body);
+    // this.api.post('/forms/warranty', body); etc.
     this.body = body;
     console.log(this.body);
   }

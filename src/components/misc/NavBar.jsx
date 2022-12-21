@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsKeyFill } from 'react-icons/bs';
-import { usePanelContext } from '@/src/contexts/PanelWrapper';
 import { useTranslation } from 'next-i18next';
+import { usePanelContext } from '@/src/contexts/PanelWrapper';
 
 function NavBar() {
   const { activePanel, setActivePanel, panels } = usePanelContext();

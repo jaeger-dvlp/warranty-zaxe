@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import NavBar from '@/src/components/misc/NavBar';
-import { usePanelContext } from '../contexts/PanelWrapper';
+import { usePanelContext } from '@/src/contexts/PanelWrapper';
 
 function Home() {
   const { t } = useTranslation();
