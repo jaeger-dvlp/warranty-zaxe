@@ -1,9 +1,9 @@
 import React from 'react';
 import { BiAddToQueue, BiEdit, BiListUl } from 'react-icons/bi';
 
+import Add from '@/src/components/panels/Add';
 import Edit from '@/src/components/panels/Edit';
 import List from '@/src/components/panels/List';
-import WarrantyForm from '@/src/components/forms/WarrantyForm';
 
 const PanelContext = React.createContext();
 
@@ -13,7 +13,7 @@ export default function PanelWrapper({ children }) {
     {
       name: 'components.navbar.buttons.add',
       icon: BiAddToQueue,
-      component: WarrantyForm,
+      component: Add,
     },
     {
       name: 'components.navbar.buttons.edit',
