@@ -7,11 +7,12 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import NavBar from '@/src/components/misc/NavBar';
 import List from '@/src/components/panels/List';
 import WarrantyForm from '@/src/components/forms/WarrantyForm';
+import Edit from '@/src/components/panels/Edit';
 
 function Home() {
   const { t } = useTranslation();
   const { activePanel } = useAppContext();
-  const Panels = [WarrantyForm, List];
+  const Panels = [WarrantyForm, Edit, List];
 
   const getActivePanel = (active) => {
     const Panel = Panels[active];
