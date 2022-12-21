@@ -16,6 +16,15 @@
       }
     }
   },
+  "components": {
+    "navbar": {
+      "buttons": {
+        "add": "Ekle",
+        "edit": "Düzenle",
+        "list": "Liste"
+      }
+    }
+  },
   "forms": {
     "global": {
       "inputs": {

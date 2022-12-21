@@ -16,6 +16,15 @@
       }
     }
   },
+  "components": {
+    "navbar": {
+      "buttons": {
+        "add": "Add",
+        "edit": "Edit",
+        "list": "List"
+      }
+    }
+  },
   "forms": {
     "global": {
       "inputs": {
