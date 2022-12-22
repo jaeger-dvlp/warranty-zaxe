@@ -40,6 +40,18 @@
         "submit": "Submit",
         "reset": "Reset"
       }
+    },
+    "auth": {
+      "inputs": {
+        "email": "E-Mail Address",
+        "password": "Password"
+      },
+      "buttons": {
+        "login": "Login",
+        "forgot-password": "Forgot Password?",
+        "go-back": "Go Back",
+        "reset-password": "Reset Password"
+      }
     }
   },
   "popups": {

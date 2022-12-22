@@ -11,7 +11,7 @@
   "pages": {
     "home": {
       "welcome": {
-        "heading": "Garantini Yönetici",
+        "heading": "Garanti Yönetici",
         "description": "Bu uygulama ile garantilerinizi kolayca yönetebilirsiniz. Yeni garantiler başlatın, mevcutları düzenleyin ve yenilerini ekleyin, koruma durumunuzu güncel tutun. Uygulama, garantilerinizle ilgilenmek için ihtiyacınız olan tüm araçları sağlar."
       }
     }
@@ -35,11 +35,23 @@
         "company-name": "Şirket İsmi",
         "serial-number": "Seri Numarası",
         "distributor-name": "Distribütör İsmi"
+      },
+      "buttons": {
+        "submit": "Gönder",
+        "reset": "Sıfırla"
       }
     },
-    "buttons": {
-      "submit": "Gönder",
-      "reset": "Sıfırla"
+    "auth": {
+      "inputs": {
+        "email": "E-Posta Adresi",
+        "password": "Şifre"
+      },
+      "buttons": {
+        "login": "Giriş Yap",
+        "forgot-password": "Şifreni mi Unuttun?",
+        "go-back": "Geri Dön",
+        "reset-password": "Şifreyi Sıfırla"
+      }
     }
   },
   "popups": {
