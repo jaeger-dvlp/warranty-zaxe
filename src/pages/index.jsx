@@ -4,16 +4,35 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import NavBar from '@/src/components/misc/NavBar';
+import { useUser } from '@supabase/auth-helpers-react';
 import { usePanelContext } from '@/src/contexts/PanelWrapper';
 
 function Home() {
   const { t } = useTranslation();
   const { panels, activePanel } = usePanelContext();
+  const user = useUser();
 
   const getActivePanel = (active) => {
-    const Panel = panels[active].component;
+    const Panel = panels[active];
+    const Component = Panel.component;
 
-    return <Panel />;
+    const FallbackPanel = panels.find(
+      ({ requiresAuth }) => requiresAuth === false
+    ).component;
+
+    if (Panel.requiresAuth && user) {
+      return <Component />;
+    }
+
+    if (!Panel.requiresAuth) {
+      return <Component />;
+    }
+
+    if (Panel.requiresAuth && !user) {
+      return <FallbackPanel />;
+    }
+
+    return null;
   };
 
   return (
