@@ -159,7 +159,7 @@ function ForgotPasswordForm({
       });
       await supabase.auth
         .resetPasswordForEmail(body.email, {
-          redirectTo: `/reset`,
+          redirectTo: `https://warranty-zaxe.vercel.app/resetpassword`,
         })
         .then(({ error }) => {
           if (error) throw error;
