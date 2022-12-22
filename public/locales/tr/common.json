@@ -52,6 +52,15 @@
         "go-back": "Geri Dön",
         "reset-password": "Şifreyi Sıfırla"
       }
+    },
+    "add-user": {
+      "inputs": {
+        "email": "E-Posta Adresi",
+        "password": "Şifre"
+      },
+      "buttons": {
+        "add": "Ekle"
+      }
     }
   },
   "popups": {
@@ -60,10 +69,27 @@
         "form-sent": "Form başarıyla gönderildi."
       },
       "errors": {
-        "invalid-field": "Geçersiz Alan."
+        "invalid-field": "Geçersiz Alan.",
+        "error-occurred": "Beklenmedik bir hata oluştu."
       },
       "buttons": {
         "ok": "Tamam"
+      }
+    },
+    "auth": {
+      "success": {
+        "logged-in": "Başarıyla giriş yaptınız.",
+        "logged-out": "Başarıyla çıkış yaptınız.",
+        "user-created": "Kullanıcı başarıyla oluşturuldu ve e-posta gönderildi.",
+        "reset-password": "Şifre sıfırlama e-postası başarıyla gönderildi."
+      },
+      "loading": {
+        "logging-in": "Giriş yapılıyor...",
+        "logging-out": "Çıkış yapılıyor...",
+        "resetting-password": "Şifre sıfırlanıyor..."
+      },
+      "errors": {
+        "invalid-credentials": "Geçersiz kimlik bilgileri."
       }
     }
   }

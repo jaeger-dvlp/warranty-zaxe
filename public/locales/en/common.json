@@ -52,6 +52,15 @@
         "go-back": "Go Back",
         "reset-password": "Reset Password"
       }
+    },
+    "add-user": {
+      "inputs": {
+        "email": "E-Mail Address",
+        "password": "Password"
+      },
+      "buttons": {
+        "add": "Add User"
+      }
     }
   },
   "popups": {
@@ -60,10 +69,27 @@
         "form-sent": "Form sent successfully."
       },
       "errors": {
-        "invalid-field": "Invalid field."
+        "invalid-field": "Invalid field.",
+        "error-occurred": "An error occurred."
       },
       "buttons": {
         "ok": "Okay"
+      }
+    },
+    "auth": {
+      "success": {
+        "logged-in": "Logged in successfully.",
+        "logged-out": "Logged out successfully.",
+        "user-created": "User created successfully and e-mail is sent.",
+        "reset-password": "Password reset link sent to your e-mail address."
+      },
+      "loading": {
+        "logging-in": "Logging in...",
+        "logging-out": "Logging out...",
+        "resetting-password": "Resetting password..."
+      },
+      "errors": {
+        "invalid-credentials": "Invalid credentials."
       }
     }
   }
