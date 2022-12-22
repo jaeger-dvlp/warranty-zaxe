@@ -10,6 +10,11 @@ export default function AppWrapper({ children }) {
     message: '',
   });
 
+  const [authPopup, setAuthPopup] = React.useState({
+    inHTML: false,
+    isActive: false,
+  });
+
   const activateAlertPopup = ({ message, status }) => {
     if (!alertPopup.isActive && !alertPopup.inHTML) {
       setAlertPopup({
@@ -57,14 +62,49 @@ export default function AppWrapper({ children }) {
     );
   };
 
+  const activateAuthPopup = () => {
+    if (!authPopup.isActive && !authPopup.inHTML) {
+      setAuthPopup({
+        inHTML: true,
+        isActive: false,
+      });
+      setTimeout(
+        () =>
+          setAuthPopup({
+            inHTML: true,
+            isActive: true,
+          }),
+        100
+      );
+    }
+  };
+
+  const deactivateAuthPopup = () => {
+    setAuthPopup({
+      inHTML: true,
+      isActive: false,
+    });
+    setTimeout(
+      () =>
+        setAuthPopup({
+          inHTML: false,
+          isActive: false,
+        }),
+      350
+    );
+  };
+
   const ContextData = React.useMemo(
     () => ({
       alertPopup,
+      authPopup,
       activateAlertPopup,
+      activateAuthPopup,
       updateAlertPopup,
       deactivateAlertPopup,
+      deactivateAuthPopup,
     }),
-    [alertPopup]
+    [alertPopup, authPopup]
   );
 
   return (
