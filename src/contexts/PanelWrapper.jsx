@@ -14,16 +14,19 @@ export default function PanelWrapper({ children }) {
       name: 'components.navbar.buttons.add',
       icon: BiAddToQueue,
       component: Add,
+      requiresAuth: false,
     },
     {
       name: 'components.navbar.buttons.edit',
       icon: BiEdit,
       component: Edit,
+      requiresAuth: true,
     },
     {
       name: 'components.navbar.buttons.list',
       icon: BiListUl,
       component: List,
+      requiresAuth: true,
     },
   ]);
 
