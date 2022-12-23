@@ -1,7 +1,9 @@
-import { useAppContext } from '@/src/contexts/AppWrapper';
 import React from 'react';
 import { useTranslation } from 'next-i18next';
+import Label from '@/src/components/misc/Label';
 import { BsFillPersonPlusFill } from 'react-icons/bs';
+import AuthService from '@/src/services/auth.service';
+import { useAppContext } from '@/src/contexts/AppWrapper';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const formPrefix = 'add-user-popup';
@@ -26,7 +28,7 @@ function AddUserPopup() {
     password: '',
   });
 
-  const handleSubmit = async (e) => {
+  const addUser = async (e) => {
     try {
       e.preventDefault();
       activateAlertPopup({
@@ -35,19 +37,22 @@ function AddUserPopup() {
       });
 
       const body = {
+        supabase,
         email: requestBody.emailAddress,
         password: requestBody.password,
       };
 
-      return await supabase.auth.signUp(body).then(({ error }) => {
-        if (error) throw error;
-
-        deactivateAddUserPopup();
-        return updateAlertPopup({
-          statusbar: 'success',
-          message: t('popups.auth.success.user-created'),
+      return await AuthService.AddUser(body)
+        .then(() => {
+          deactivateAddUserPopup();
+          return updateAlertPopup({
+            status: 'success',
+            message: t('popups.auth.success.user-created'),
+          });
+        })
+        .catch((err) => {
+          throw err;
         });
-      });
     } catch (error) {
       if (error.message === 'Invalid login credentials') {
         return updateAlertPopup({
@@ -89,13 +94,13 @@ function AddUserPopup() {
     inHTML && (
       <div
         onClick={() => deactivateAddUserPopup()}
-        className={`fixed auth-popup-container font-mark transition-all duration-300 top-0 left-0 z-[9999999] flex items-center justify-center w-full h-full p-5 bg-black/50  ${
+        className={`fixed adduser-popup-container font-mark transition-all duration-300 top-0 left-0 z-[9999999] flex items-center justify-center w-full h-full p-5 bg-black/50  ${
           isActive ? 'opacity-100 visible' : 'opacity-0 invisible'
         } `}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`grid relative w-full auth-popup max-w-md grid-cols-1 gap-10 p-5 transition-all duration-[0.3s] bg-white rounded-xl shadow-2xl shadow-black/40 place-content-between place-items-center ${
+          className={`grid relative w-full adduser-popup max-w-md grid-cols-1 gap-10 p-5 transition-all duration-[0.3s] bg-white rounded-xl shadow-2xl shadow-black/40 place-content-between place-items-center ${
             isActive ? 'translate-y-0' : 'translate-y-10'
           }`}
         >
@@ -105,8 +110,8 @@ function AddUserPopup() {
             </span>
           </div>
           <form
-            onSubmit={handleSubmit}
-            className="grid w-full grid-cols-1 gap-5 auth-login-form fade-in place-content-start place-items-start"
+            onSubmit={addUser}
+            className="grid w-full grid-cols-1 gap-5 adduser-form fade-in place-content-start place-items-start"
           >
             <section className="relative w-full">
               <input
@@ -149,15 +154,6 @@ function AddUserPopup() {
         </div>
       </div>
     )
-  );
-}
-
-function Label({ htmlFor, required, children }) {
-  return (
-    <label htmlFor={htmlFor} className={Classes.label}>
-      {children}
-      {required && <span className="!text-red-300"> *</span>}
-    </label>
   );
 }
 

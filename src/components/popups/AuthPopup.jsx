@@ -1,7 +1,9 @@
 import React from 'react';
-import { useTranslation } from 'next-i18next';
-import { useAppContext } from '@/src/contexts/AppWrapper';
 import { BsLockFill } from 'react-icons/bs';
+import { useTranslation } from 'next-i18next';
+import Label from '@/src/components/misc/Label';
+import AuthService from '@/src/services/auth.service';
+import { useAppContext } from '@/src/contexts/AppWrapper';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const Classes = {
@@ -29,19 +31,22 @@ function LoginForm({ formPrefix = 'auth-login-form', setActiveTab }) {
       });
 
       const body = {
+        supabase,
         email: requestBody.emailAddress,
         password: requestBody.password,
       };
 
-      return await supabase.auth.signInWithPassword(body).then(({ error }) => {
-        if (error) throw error;
-
-        deactivateAuthPopup();
-        return updateAlertPopup({
-          status: 'success',
-          message: t('popups.auth.success.logged-in'),
+      return await AuthService.Login(body)
+        .then(async () => {
+          deactivateAuthPopup();
+          return updateAlertPopup({
+            status: 'success',
+            message: t('popups.auth.success.logged-in'),
+          });
+        })
+        .catch((err) => {
+          throw err;
         });
-      });
     } catch (error) {
       if (error.message === 'Invalid login credentials') {
         return updateAlertPopup({
@@ -159,7 +164,9 @@ function ForgotPasswordForm({
       });
       await supabase.auth
         .resetPasswordForEmail(body.email, {
-          redirectTo: `https://warranty-zaxe.vercel.app/resetpassword`,
+          redirectTo: `${
+            window?.location?.origin || 'https://warranty-zaxe.vercel.app'
+          }/resetpassword`,
         })
         .then(({ error }) => {
           if (error) throw error;
@@ -277,15 +284,6 @@ function AuthPopup() {
         </div>
       </div>
     )
-  );
-}
-
-function Label({ htmlFor, required, children }) {
-  return (
-    <label htmlFor={htmlFor} className={Classes.label}>
-      {children}
-      {required && <span className="!text-red-300"> *</span>}
-    </label>
   );
 }
 

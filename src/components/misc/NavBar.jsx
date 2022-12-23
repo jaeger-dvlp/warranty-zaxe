@@ -5,6 +5,7 @@ import {
   BsKeyFill,
 } from 'react-icons/bs';
 import { useTranslation } from 'next-i18next';
+import AuthService from '@/src/services/auth.service';
 import { useAppContext } from '@/src/contexts/AppWrapper';
 import { usePanelContext } from '@/src/contexts/PanelWrapper';
 import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
@@ -137,8 +138,7 @@ function LogoutButton() {
         message: t('popups.auth.loading.logging-out'),
       });
 
-      return await supabase.auth
-        .signOut()
+      return await AuthService.Logout(supabase)
         .then(() => {
           updateAlertPopup({
             status: 'success',
