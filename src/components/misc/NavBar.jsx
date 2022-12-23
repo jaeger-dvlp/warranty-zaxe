@@ -40,8 +40,11 @@ function UserDetails() {
   if (!user) return null;
 
   return (
-    <div className="absolute fade-in left-0 p-3 text-xs -top-0 -translate-y-[125%] bg-white shadow-xl rounded-md text-zinc-600">
-      Hello, {user.email}. 👋
+    <div className="absolute fade-in flex justify-start gap-1 group items-center text-left max-w-[80%] right-5 px-3 pt-2 pb-1 text-xs font-medium -top-0 -translate-y-[100%] bg-white rounded-b-none rounded-t-lg text-zinc-500">
+      <span>Hello, {user.email}</span>{' '}
+      <span className="transition-all duration-200 group-hover:rotate-[35deg] group-hover:scale-110 delay-500 group-hover:delay-75">
+        👋
+      </span>
     </div>
   );
 }
