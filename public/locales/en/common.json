@@ -14,6 +14,12 @@
         "heading": "Warranty Manager",
         "description": "Easily manage your warranties with this tool. Start new warranties, edit existing ones, and add new ones to keep your protection up-to-date. The app provides all the tools you need to stay on top of your warranties."
       }
+    },
+    "resetpwd": {
+      "welcome": {
+        "heading": "Reset Password",
+        "description": "Enter your new password and reset it."
+      }
     }
   },
   "components": {
