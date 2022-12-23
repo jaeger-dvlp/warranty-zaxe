@@ -67,6 +67,17 @@
       "buttons": {
         "add": "Add User"
       }
+    },
+    "reset-pwd": {
+      "inputs": {
+        "pwd": "Password",
+        "pwd-confirm": "Confirm Password"
+      },
+      "buttons": {
+        "not-logged-in": "Account not found, please login or use the link in your e-mail.",
+        "go-back": "Go Back",
+        "update": "Update Password"
+      }
     }
   },
   "popups": {
@@ -96,6 +107,17 @@
       },
       "errors": {
         "invalid-credentials": "Invalid credentials."
+      }
+    },
+    "reset-pwd": {
+      "success": {
+        "password-reset": "Password reset successfully."
+      },
+      "loading": {
+        "resetting-password": "Resetting password..."
+      },
+      "errors": {
+        "passwords-not-match": "Passwords do not match."
       }
     }
   }

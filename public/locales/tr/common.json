@@ -67,6 +67,17 @@
       "buttons": {
         "add": "Ekle"
       }
+    },
+    "reset-pwd": {
+      "inputs": {
+        "pwd": "Şifre",
+        "pwd-confirm": "Şifre (Tekrar)"
+      },
+      "buttons": {
+        "not-logged-in": "Hesap bulunamadı, lütfen giriş yapın veya posta adresinize gelen bağlantıyı kullanın.",
+        "go-back": "Geri Dön",
+        "update": "Güncelle"
+      }
     }
   },
   "popups": {
@@ -96,6 +107,17 @@
       },
       "errors": {
         "invalid-credentials": "Geçersiz kimlik bilgileri."
+      }
+    },
+    "reset-pwd": {
+      "success": {
+        "password-reset": "Şifre başarıyla sıfırlandı."
+      },
+      "loading": {
+        "resetting-password": "Şifre sıfırlanıyor..."
+      },
+      "errors": {
+        "passwords-not-match": "Şifreler eşleşmiyor."
       }
     }
   }
