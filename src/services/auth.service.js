@@ -70,6 +70,25 @@ class AuthService {
       throw new Error(error?.message || error);
     }
   }
+
+  async ResetPWD({ supabase, email, password }) {
+    try {
+      return new Promise((resolve, reject) => {
+        setTimeout(async () => {
+          this.supabase = supabase;
+          const data = await this.supabase.auth.updateUser({ email, password });
+
+          if (data.error) {
+            reject(data.error);
+          }
+
+          resolve(data);
+        }, 1000);
+      });
+    } catch (error) {
+      throw new Error(error?.message || error);
+    }
+  }
 }
 
 export default new AuthService();
