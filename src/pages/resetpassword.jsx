@@ -36,10 +36,14 @@ function ResetPassword({
 
       const { password, passwordConfirmation } = requestBody;
       if (password !== passwordConfirmation) {
-        return updateAlertPopup({
-          status: 'error',
-          message: t('popups.reset-pwd.errors.passwords-not-match'),
-        });
+        return setTimeout(
+          () =>
+            updateAlertPopup({
+              status: 'error',
+              message: t('popups.reset-pwd.errors.passwords-not-match'),
+            }),
+          1000
+        );
       }
 
       return await AuthService.ResetPWD({
