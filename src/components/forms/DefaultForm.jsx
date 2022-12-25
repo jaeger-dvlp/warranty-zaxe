@@ -1,5 +1,6 @@
 import React from 'react';
 import Classes from '@/src/utils/Classes';
+import { BiImageAdd } from 'react-icons/bi';
 import { useTranslation } from 'next-i18next';
 import Countries from '@/src/data/countryStates.json';
 import firstUpperCase from '@/src/utils/FirstUpperCase';
@@ -13,12 +14,15 @@ function DefaultForm({
   const { t } = useTranslation();
   const { activateAlertPopup } = useAppContext();
   const [requestBody, setRequestBody] = React.useState({
+    deviceSerialNumber: '',
+    purchaseDate: '',
     name: '',
     surname: '',
     emailAddress: '',
+    phoneNumber: '',
     country: '',
+    invoiceImage: '',
     companyName: '',
-    serialNumber: '',
     distributorName: '',
   });
 
@@ -98,6 +102,45 @@ function DefaultForm({
           type="text"
           autoComplete="on"
           className={Classes.input}
+          id={`${formPrefix}-deviceSerialNumber`}
+          placeholder=" "
+          pattern="{3,}"
+          minLength={3}
+          required
+          onChange={(e) => {
+            const Event = e;
+            Event.target.value = firstUpperCase(Event.target.value);
+            HandleChange(Event);
+          }}
+        />
+        <Label required htmlFor={`${formPrefix}-deviceSerialNumber`}>
+          {t('forms.global.inputs.deviceSerialNumber')}
+        </Label>
+      </section>
+      <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
+        <input
+          type="text"
+          autoComplete="on"
+          className={Classes.input}
+          id={`${formPrefix}-purchaseDate`}
+          placeholder=" "
+          pattern="\D{3,}"
+          required
+          onChange={(e) => {
+            const Event = e;
+            Event.target.value = firstUpperCase(Event.target.value);
+            HandleChange(Event);
+          }}
+        />
+        <Label required htmlFor={`${formPrefix}-purchaseDate`}>
+          {t('forms.global.inputs.purchaseDate')}
+        </Label>
+      </section>
+      <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
+        <input
+          type="text"
+          autoComplete="on"
+          className={Classes.input}
           id={`${formPrefix}-name`}
           placeholder=" "
           pattern="\D{3,}"
@@ -143,7 +186,26 @@ function DefaultForm({
           onChange={HandleChange}
         />
         <Label required htmlFor={`${formPrefix}-emailAddress`}>
-          {t('forms.global.inputs.email')}
+          {t('forms.global.inputs.emailAddress')}
+        </Label>
+      </section>
+      <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
+        <input
+          type="text"
+          autoComplete="on"
+          className={Classes.input}
+          id={`${formPrefix}-phoneNumber`}
+          placeholder=" "
+          pattern="[0-9]{10,15}"
+          required
+          onChange={(e) => {
+            const Event = e;
+            Event.target.value = firstUpperCase(Event.target.value);
+            HandleChange(Event);
+          }}
+        />
+        <Label required htmlFor={`${formPrefix}-phoneNumber`}>
+          {t('forms.global.inputs.phoneNumber')}
         </Label>
       </section>
       <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
@@ -165,6 +227,18 @@ function DefaultForm({
           ))}
         </select>
       </section>
+      <section className="relative h-[3.5rem] w-full xl:col-span-1 lg:col-span-1 border-none rounded-md font-semibold text-slate-500  col-span-full flex justify-center items-center flex-nowrap">
+        <span className="w-full border-slate-200 border-r-0 rounded-l-md border-2 p-2 flex justify-start gap-1 items-center text-left h-full overflow-hidden">
+          <span>{t('forms.global.inputs.invoiceImage')}</span>
+          <span className="!text-red-300"> *</span>
+        </span>
+        <button
+          className="w-full p-2 rounded-r-md h-full flex hover:bg-zaxe transition-all duration-150 justify-center items-center max-w-[75px] overflow-hidden !outline-none !ring-0 bg-zinc-400 text-zinc-600 hover:text-white"
+          type="button"
+        >
+          <BiImageAdd className="w-[30px] h-[30px] pl-[3px]" />
+        </button>
+      </section>
       <section className="relative w-full col-span-full">
         <input
           required
@@ -177,26 +251,7 @@ function DefaultForm({
           className={Classes.input}
         />
         <Label required htmlFor={`${formPrefix}-companyName`}>
-          {t('forms.global.inputs.company-name')}
-        </Label>
-      </section>
-      <section className="relative w-full col-span-full">
-        <input
-          required
-          autoComplete="on"
-          type="text"
-          placeholder=" "
-          pattern="\D{3,}"
-          id={`${formPrefix}-serialNumber`}
-          onChange={(e) => {
-            const Event = e;
-            Event.target.value = Event.target.value.toUpperCase();
-            return HandleChange(Event);
-          }}
-          className={Classes.input}
-        />
-        <Label required htmlFor={`${formPrefix}-serialNumber`}>
-          {t('forms.global.inputs.serial-number')}
+          {t('forms.global.inputs.companyName')}
         </Label>
       </section>
       <section className="relative w-full col-span-full">
@@ -211,7 +266,7 @@ function DefaultForm({
           className={Classes.input}
         />
         <Label required htmlFor={`${formPrefix}-distributorName`}>
-          {t('forms.global.inputs.distributor-name')}
+          {t('forms.global.inputs.distributorName')}
         </Label>
       </section>
       <section className="relative flex items-center justify-end w-full gap-3 col-span-full">
