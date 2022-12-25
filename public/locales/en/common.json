@@ -34,13 +34,16 @@
   "forms": {
     "global": {
       "inputs": {
+        "deviceSerialNumber": "Device Serial Number",
+        "purchaseDate": "Purchase Date",
         "name": "Name",
         "surname": "Surname",
-        "email": "E-Mail Address",
+        "emailAddress": "E-Mail Address",
+        "phoneNumber": "Phone Number",
         "country": "Country",
-        "company-name": "Company Name",
-        "serial-number": "Serial Number",
-        "distributor-name": "Distributor Name"
+        "invoiceImage": "Invoice Image",
+        "companyName": "Company Name",
+        "distributorName": "Distributor Name"
       },
       "buttons": {
         "submit": "Submit",

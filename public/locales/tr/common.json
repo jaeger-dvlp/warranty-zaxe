@@ -34,13 +34,16 @@
   "forms": {
     "global": {
       "inputs": {
+        "deviceSerialNumber": "Cihaz Seri Numarası",
+        "purchaseDate": "Satın Alma Tarihi",
         "name": "İsim",
         "surname": "Soyisim",
-        "email": "E-Posta Adresi",
+        "emailAddress": "E-Posta Adresi",
+        "phoneNumber": "Telefon Numarası",
         "country": "Ülke",
-        "company-name": "Şirket İsmi",
-        "serial-number": "Seri Numarası",
-        "distributor-name": "Distribütör İsmi"
+        "invoiceImage": "Fatura Resmi",
+        "companyName": "Şirket Adı",
+        "distributorName": "Distribütör Adı"
       },
       "buttons": {
         "submit": "Gönder",
