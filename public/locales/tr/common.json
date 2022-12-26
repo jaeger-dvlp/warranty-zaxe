@@ -25,6 +25,7 @@
   "components": {
     "navbar": {
       "buttons": {
+        "home": "Menu",
         "add": "Ekle",
         "edit": "Düzenle",
         "list": "Liste"

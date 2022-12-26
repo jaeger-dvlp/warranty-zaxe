@@ -25,6 +25,7 @@
   "components": {
     "navbar": {
       "buttons": {
+        "home": "Menu",
         "add": "Add",
         "edit": "Edit",
         "list": "List"
