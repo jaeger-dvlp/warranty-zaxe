@@ -119,7 +119,7 @@ function AuthButton() {
   return (
     <button
       onClick={() => activateAuthPopup()}
-      className="bg-zinc-100 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-200 border text-zinc-600 flex items-center justify-center gap-1 p-1 px-2 font-semibold text-center transition-all duration-100  rounded-md ring-0 !ring-sky-400 active:ring"
+      className="bg-zinc-100 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-200 border text-zinc-600 flex items-center justify-center gap-1 p-1.5  font-semibold text-center transition-all duration-100  rounded-md ring-0 !ring-sky-400 active:ring"
       type="button"
     >
       <BsKeyFill className="w-6 h-6" />
@@ -167,7 +167,7 @@ function LogoutButton() {
       onClick={async () => {
         await signOut();
       }}
-      className="bg-zinc-100 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-200 border text-zinc-600 flex items-center justify-center gap-1 p-1 px-2 font-semibold text-center transition-all duration-100  rounded-md ring-0 !ring-sky-400 active:ring"
+      className="bg-zinc-100 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-200 border text-zinc-600 flex items-center justify-center gap-1 p-1.5 font-semibold text-center transition-all duration-100  rounded-md ring-0 !ring-sky-400 active:ring"
       type="button"
     >
       <BsBoxArrowInRight className="w-6 h-6" />
@@ -184,7 +184,7 @@ function AddUserPopup() {
   return (
     <button
       onClick={() => activateAddUserPopup()}
-      className="bg-zinc-100 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-200 border text-zinc-600 flex items-center justify-center gap-1 p-1 px-2 font-semibold text-center transition-all duration-100  rounded-md ring-0 !ring-sky-400 active:ring"
+      className="bg-zinc-100 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-200 border text-zinc-600 flex items-center justify-center gap-1 p-1.5 font-semibold text-center transition-all duration-100  rounded-md ring-0 !ring-sky-400 active:ring"
       type="button"
     >
       <BsFillPersonPlusFill className="w-6 h-6" />
