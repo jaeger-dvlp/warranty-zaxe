@@ -12,6 +12,7 @@ import Loader from '@/src/components/misc/Loader';
 import AuthPopup from '@/src/components/popups/AuthPopup';
 import AlertPopup from '@/src/components/popups/AlertPopup';
 import AddUserPopup from '@/src/components/popups/AddUserPopup';
+import ChoosePopup from '../components/popups/ChoosePopup';
 
 function App({ Component, pageProps }) {
   return (
@@ -23,6 +24,7 @@ function App({ Component, pageProps }) {
           <AlertPopup />
           <AuthPopup />
           <AddUserPopup />
+          <ChoosePopup />
           <Component {...pageProps} />
         </PanelWrapper>
       </SupaWrapper>
