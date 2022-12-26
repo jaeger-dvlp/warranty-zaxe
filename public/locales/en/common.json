@@ -34,16 +34,46 @@
   "forms": {
     "global": {
       "inputs": {
-        "deviceSerialNumber": "Device Serial Number",
-        "purchaseDate": "Purchase Date",
-        "name": "Name",
-        "surname": "Surname",
-        "emailAddress": "E-Mail Address",
-        "phoneNumber": "Phone Number",
-        "country": "Country",
-        "invoiceImage": "Invoice Image",
-        "companyName": "Company Name",
-        "distributorName": "Distributor Name"
+        "deviceSerialNumber": {
+          "label": "Device Serial Number",
+          "invalid": "Must starts with ZX, minimum 6 characters, required."
+        },
+        "purchaseDate": {
+          "label": "Purchase Date",
+          "invalid": "Format must be DD/MM/YYYY, required."
+        },
+        "name": {
+          "label": "Name",
+          "invalid": "Minimum 2 characters, required."
+        },
+        "surname": {
+          "label": "Surname",
+          "invalid": "Minimum 2 characters, required."
+        },
+        "emailAddress": {
+          "label": "E-Mail Address",
+          "invalid": "Must be a valid e-mail address, required."
+        },
+        "phoneNumber": {
+          "label": "Phone Number",
+          "invalid": "Must be a valid phone number, required."
+        },
+        "country": {
+          "label": "Country",
+          "invalid": "Required."
+        },
+        "invoiceImage": {
+          "label": "Invoice Image",
+          "invalid": "Required."
+        },
+        "companyName": {
+          "label": "Company Name",
+          "invalid": "Minimum 2 characters, required."
+        },
+        "distributorName": {
+          "label": "Distributor Name",
+          "invalid": "Minimum 2 characters, required."
+        }
       },
       "buttons": {
         "submit": "Submit",
@@ -121,6 +151,20 @@
       },
       "errors": {
         "passwords-not-match": "Passwords do not match."
+      }
+    },
+    "choose": {
+      "success": {
+        "image-selected": "Image selected successfully.",
+        "image-already-selected": "Image already selected."
+      },
+      "loading": null,
+      "errors": {
+        "invalid-file-type": "File type is not supported."
+      },
+      "label": {
+        "current-image": "Current Image",
+        "not-selected": "Not selected"
       }
     }
   }

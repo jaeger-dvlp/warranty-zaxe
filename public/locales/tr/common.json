@@ -34,16 +34,46 @@
   "forms": {
     "global": {
       "inputs": {
-        "deviceSerialNumber": "Cihaz Seri Numarası",
-        "purchaseDate": "Satın Alma Tarihi",
-        "name": "İsim",
-        "surname": "Soyisim",
-        "emailAddress": "E-Posta Adresi",
-        "phoneNumber": "Telefon Numarası",
-        "country": "Ülke",
-        "invoiceImage": "Fatura Resmi",
-        "companyName": "Şirket Adı",
-        "distributorName": "Distribütör Adı"
+        "deviceSerialNumber": {
+          "label": "Cihaz Seri Numarası",
+          "invalid": "ZX ile başlamalı, minimum 6 karakter, zorunlu."
+        },
+        "purchaseDate": {
+          "label": "Satın Alma Tarihi",
+          "invalid": "Format GG/AA/YYYY olmalı, zorunlu."
+        },
+        "name": {
+          "label": "İsim",
+          "invalid": "Minimum 2 karakter, zorunlu."
+        },
+        "surname": {
+          "label": "Soyisim",
+          "invalid": "Minimum 2 karakter, zorunlu."
+        },
+        "emailAddress": {
+          "label": "E-Posta Adresi",
+          "invalid": "Geçerli bir e-posta adresi olmalı, zorunlu."
+        },
+        "phoneNumber": {
+          "label": "Telefon Numarası",
+          "invalid": "Minimum 9 karakter, zorunlu."
+        },
+        "country": {
+          "label": "Ülke",
+          "invalid": "Zorunlu."
+        },
+        "invoiceImage": {
+          "label": "Fatura Resmi",
+          "invalid": "Zorunlu."
+        },
+        "companyName": {
+          "label": "Şirket İsmi",
+          "invalid": "Minimum 2 karakter, zorunlu."
+        },
+        "distributorName": {
+          "label": "Distribütör İsmi",
+          "invalid": "Minimum 2 karakter, zorunlu."
+        }
       },
       "buttons": {
         "submit": "Gönder",
@@ -121,6 +151,20 @@
       },
       "errors": {
         "passwords-not-match": "Şifreler eşleşmiyor."
+      }
+    },
+    "choose": {
+      "success": {
+        "image-selected": "Resim seçildi.",
+        "image-already-selected": "Bu resim zaten seçildi."
+      },
+      "loading": null,
+      "errors": {
+        "invalid-file-type": "Geçersiz dosya türü."
+      },
+      "label": {
+        "current-image": "Mevcut Resim",
+        "not-selected": "Seçilmedi"
       }
     }
   }
