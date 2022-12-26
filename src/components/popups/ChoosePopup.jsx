@@ -15,24 +15,24 @@ function ChoosePopup() {
   } = useAppContext();
 
   const { t } = useTranslation();
-  const [selectedFile, setSelectedFile] = React.useState(state || null);
+  const [currentImage, setCurrentImage] = React.useState(null);
   const getType = (base64) => base64.split(';')[0]?.split(':')[1];
 
+  React.useEffect(() => {
+    setCurrentImage(state);
+  }, [state, activateState]);
+
   const setFile = (file) => {
-    if (state?.name !== file.name && selectedFile?.name !== file.name) {
+    if (state?.name !== file.name) {
       activateState(file);
-      setSelectedFile(file);
+      setCurrentImage(file);
 
       return activateAlertPopup({
         status: 'success',
         message: t('popups.choose.success.image-selected'),
       });
     }
-
-    return activateAlertPopup({
-      status: 'success',
-      message: t('popups.choose.success.image-already-selected'),
-    });
+    return null;
   };
 
   const fileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
@@ -183,12 +183,13 @@ function ChoosePopup() {
             onChange={handleFile}
             multiple={false}
           />
-          <p className="text-sm text-center text-zinc-500">
-            {t('popups.choose.label.current-image')} :{' '}
-            {(state?.name && `${state?.name.slice('0', '20')}..`) ||
-              (selectedFile?.name &&
-                `${selectedFile?.name.slice('0', '20')}..`) ||
-              t('popups.choose.label.not-selected')}
+          <p className="grid grid-cols-1 gap-1 text-sm text-center place-content-start place-items-center text-zinc-500">
+            <span>{t('popups.choose.label.current-image')};</span>
+            <span className="text-xs">
+              {(currentImage?.name &&
+                `${currentImage?.name.slice('0', '50')}..`) ||
+                t('popups.choose.label.not-selected')}
+            </span>
           </p>
           <div className="w-full transition-all duration-150 img-drop-area h-[150px] border-2 bg-zinc-100 border-dashed border-zinc-300 rounded-md flex justify-center items-center">
             {getDropArea()}

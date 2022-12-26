@@ -101,14 +101,18 @@ function DefaultForm({
       selects[i].value = '';
     });
     setRequestBody({
+      deviceSerialNumber: '',
+      purchaseDate: '',
       name: '',
       surname: '',
       emailAddress: '',
+      phoneNumber: '',
       country: '',
+      invoiceImage: null,
       companyName: '',
-      serialNumber: '',
       distributorName: '',
     });
+    setInvoiceImage(null);
   };
 
   React.useEffect(() => {
@@ -293,7 +297,6 @@ function DefaultForm({
           onClick={() => {
             if (requestBody.invoiceImage) {
               return activateChoosePopup({
-                image: requestBody.invoiceImage,
                 stateChanger: {
                   state: invoiceImage,
                   activateState: setInvoiceImage,
@@ -301,7 +304,6 @@ function DefaultForm({
               });
             }
             return activateChoosePopup({
-              image: null,
               stateChanger: {
                 state: invoiceImage,
                 activateState: setInvoiceImage,
