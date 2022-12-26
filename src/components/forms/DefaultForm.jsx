@@ -125,14 +125,10 @@ function DefaultForm({
   }, [invoiceImage, requestBody]);
 
   return (
-    <form
-      autoComplete="on"
-      className={`grid ${formName} w-full grid-cols-2 gap-5`}
-    >
+    <form className={`grid ${formName} w-full grid-cols-2 gap-5`}>
       <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
         <input
           type="text"
-          autoComplete="on"
           className={Classes.input}
           id={`${formPrefix}-deviceSerialNumber`}
           placeholder=" "
@@ -158,7 +154,6 @@ function DefaultForm({
       <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
         <input
           type="text"
-          autoComplete="on"
           className={Classes.input}
           id={`${formPrefix}-purchaseDate`}
           placeholder=" "
@@ -183,7 +178,6 @@ function DefaultForm({
       <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
         <input
           type="text"
-          autoComplete="on"
           className={Classes.input}
           id={`${formPrefix}-name`}
           placeholder=" "
@@ -205,7 +199,6 @@ function DefaultForm({
       <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
         <input
           type="text"
-          autoComplete="on"
           className={Classes.input}
           id={`${formPrefix}-surname`}
           placeholder=" "
@@ -227,7 +220,6 @@ function DefaultForm({
       <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
         <input
           type="email"
-          autoComplete="on"
           className={Classes.input}
           id={`${formPrefix}-emailAddress`}
           placeholder=" "
@@ -247,7 +239,6 @@ function DefaultForm({
       <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
         <input
           type="text"
-          autoComplete="on"
           className={Classes.input}
           id={`${formPrefix}-phoneNumber`}
           placeholder=" "
@@ -326,7 +317,6 @@ function DefaultForm({
       <section className="relative w-full col-span-full">
         <input
           required
-          autoComplete="on"
           type="text"
           placeholder=" "
           pattern="{1,}$"
@@ -346,7 +336,6 @@ function DefaultForm({
       <section className="relative w-full col-span-full">
         <input
           required
-          autoComplete="on"
           type="text"
           placeholder=" "
           pattern="{1,}$"
