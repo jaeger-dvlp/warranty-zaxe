@@ -181,15 +181,17 @@ function DefaultForm({
           className={Classes.input}
           id={`${formPrefix}-name`}
           placeholder=" "
-          pattern="{1,}$"
+          minLength={2}
           required
           onInvalid={(e) =>
             e.target.setCustomValidity(t('forms.global.inputs.name.invalid'))
           }
           onChange={(e) => {
             const Event = e;
-            Event.target.value = firstUpperCase(Event.target.value);
-            HandleChange(Event);
+            if (Event.target.validity.valid) {
+              Event.target.value = firstUpperCase(Event.target.value);
+              HandleChange(Event);
+            }
           }}
         />
         <Label required htmlFor={`${formPrefix}-name`}>
@@ -202,7 +204,7 @@ function DefaultForm({
           className={Classes.input}
           id={`${formPrefix}-surname`}
           placeholder=" "
-          pattern="{1,}$"
+          minLength={2}
           required
           onInvalid={(e) =>
             e.target.setCustomValidity(t('forms.global.inputs.surname.invalid'))
@@ -319,7 +321,7 @@ function DefaultForm({
           required
           type="text"
           placeholder=" "
-          pattern="{1,}$"
+          minLength={2}
           id={`${formPrefix}-companyName`}
           onInvalid={(e) =>
             e.target.setCustomValidity(
@@ -338,7 +340,7 @@ function DefaultForm({
           required
           type="text"
           placeholder=" "
-          pattern="{1,}$"
+          minLength={2}
           id={`${formPrefix}-distributorName`}
           onInvalid={(e) =>
             e.target.setCustomValidity(
