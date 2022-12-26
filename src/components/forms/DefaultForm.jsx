@@ -145,8 +145,10 @@ function DefaultForm({
           required
           onChange={(e) => {
             const Event = e;
-            Event.target.value = firstUpperCase(Event.target.value);
-            HandleChange(Event);
+            Event.target.value = Event.target.value.toUpperCase();
+            if (Event.target.validity.valid) {
+              HandleChange(Event);
+            }
           }}
         />
         <Label required htmlFor={`${formPrefix}-deviceSerialNumber`}>
