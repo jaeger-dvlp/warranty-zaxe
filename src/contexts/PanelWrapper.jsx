@@ -1,15 +1,22 @@
 import React from 'react';
-import { BiAddToQueue, BiEdit, BiListUl } from 'react-icons/bi';
+import { BiAddToQueue, BiEdit, BiHome, BiListUl } from 'react-icons/bi';
 
 import Add from '@/src/components/panels/Add';
 import Edit from '@/src/components/panels/Edit';
 import List from '@/src/components/panels/List';
+import Home from '@/src/components/panels/Home';
 
 const PanelContext = React.createContext();
 
 export default function PanelWrapper({ children }) {
   const [activePanel, setActivePanel] = React.useState(0);
   const [panels] = React.useState([
+    {
+      name: 'components.navbar.buttons.home',
+      icon: BiHome,
+      component: Home,
+      requiresAuth: false,
+    },
     {
       name: 'components.navbar.buttons.add',
       icon: BiAddToQueue,
