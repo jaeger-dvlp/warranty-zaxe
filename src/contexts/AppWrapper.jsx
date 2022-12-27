@@ -30,6 +30,14 @@ export default function AppWrapper({ children }) {
     },
   });
 
+  const [confirmPopup, setConfirmPopup] = React.useState({
+    inHTML: false,
+    isActive: false,
+    message: '',
+    onConfirm: () => {},
+    onCancel: () => {},
+  });
+
   const activateAlertPopup = ({ message, status }) => {
     if (!alertPopup.isActive && !alertPopup.inHTML) {
       setAlertPopup({
@@ -184,23 +192,70 @@ export default function AppWrapper({ children }) {
     );
   };
 
+  const activateConfirmPopup = ({ message, onConfirm, onCancel }) => {
+    if (!confirmPopup.isActive && !confirmPopup.inHTML) {
+      setConfirmPopup({
+        inHTML: true,
+        isActive: false,
+        message,
+        onConfirm,
+        onCancel,
+      });
+      setTimeout(
+        () =>
+          setConfirmPopup({
+            inHTML: true,
+            isActive: true,
+            message,
+            onConfirm,
+            onCancel,
+          }),
+        100
+      );
+    }
+  };
+
+  const deactivateConfirmPopup = () => {
+    setConfirmPopup({
+      inHTML: true,
+      isActive: false,
+      message: confirmPopup.message,
+      onConfirm: confirmPopup.onConfirm,
+      onCancel: confirmPopup.onCancel,
+    });
+    setTimeout(
+      () =>
+        setConfirmPopup({
+          inHTML: false,
+          isActive: false,
+          message: '',
+          onConfirm: () => {},
+          onCancel: () => {},
+        }),
+      350
+    );
+  };
+
   const ContextData = React.useMemo(
     () => ({
       alertPopup,
       authPopup,
       addUserPopup,
       choosePopup,
+      confirmPopup,
       activateAlertPopup,
       activateAuthPopup,
       activateAddUserPopup,
       activateChoosePopup,
+      activateConfirmPopup,
       updateAlertPopup,
       deactivateAlertPopup,
       deactivateAuthPopup,
       deactivateAddUserPopup,
       deactivateChoosePopup,
+      deactivateConfirmPopup,
     }),
-    [alertPopup, authPopup, addUserPopup, choosePopup]
+    [alertPopup, authPopup, addUserPopup, choosePopup, confirmPopup]
   );
 
   return (
