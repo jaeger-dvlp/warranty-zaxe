@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { BiEdit, BiTrashAlt } from 'react-icons/bi';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useAppContext } from '@/src/contexts/AppWrapper';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 function Loading() {
   return (
