@@ -27,39 +27,29 @@ div.dragover {
   @apply bg-sky-200;
 }
 
-div.warranty-list-table-container {
-  @apply overflow-scroll;
-}
-
 table.warranty-list-table {
-  @apply w-full p-0 overflow-hidden border border-separate rounded-md border-zinc-200 bg-zinc-100 border-spacing-0;
+  @apply w-full text-sm text-left text-gray-500;
 }
 
-table.warranty-list-table th,
-table.warranty-list-table td {
-  @apply !p-2 border border-zinc-200 text-left whitespace-nowrap;
+table.warranty-list-table > thead {
+  @apply text-xs text-gray-700 uppercase bg-gray-50;
 }
 
-table.warranty-list-table thead {
-  @apply !w-full !min-w-fit rounded-md overflow-hidden text-zinc-700 font-semibold bg-zinc-100 !p-5;
+table.warranty-list-table thead th {
+  @apply px-6 py-3 whitespace-nowrap;
 }
 
-table.warranty-list-table th {
-  @apply w-full !p-5 text-xs font-normal min-w-max;
+table.warranty-list-table > tbody tr {
+  @apply transition-all duration-200 ease-in-out bg-white border-b hover:bg-gray-50;
+}
+table.warranty-list-table > tbody tr th {
+  @apply px-6 py-4 font-medium text-gray-900 whitespace-nowrap;
 }
 
-table.warranty-list-table tbody tr {
-  @apply transition-all duration-200 bg-zinc-100 hover:bg-zinc-200;
+table.warranty-list-table > tbody tr td {
+  @apply !py-4 !px-6;
 }
 
-table.warranty-list-table tbody tr:hover td {
-  @apply border-zinc-300;
-}
-
-table.warranty-list-table tbody tr td {
-  @apply !text-xs !px-5 text-zinc-900 transition-all duration-200;
-}
-
-table.warranty-list-table tbody tr td a {
-  @apply !text-xs text-sky-700 hover:text-zinc-800 hover:underline;
+table.warranty-list-table td[data-field='phoneNumber'] {
+  @apply !whitespace-nowrap;
 }
