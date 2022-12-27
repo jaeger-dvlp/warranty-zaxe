@@ -28,7 +28,7 @@ function Empty() {
   );
 }
 
-function DeleteButton({ id }) {
+function DeleteButton({ id, deviceSerialNumber }) {
   const supaBase = useSupabaseClient();
   const { activateAlertPopup } = useAppContext();
   const deleteItem = async () => {
@@ -39,12 +39,13 @@ function DeleteButton({ id }) {
 
     if (error)
       return activateAlertPopup({
-        status: 'Error',
+        status: 'error',
         message: error?.message || 'An error occurred while deleting the item',
       });
 
+    document.querySelector(`tr#list-item-${id}-${deviceSerialNumber}`).remove();
     return activateAlertPopup({
-      status: 'Success',
+      status: 'success',
       message: 'Item deleted successfully.',
     });
   };
@@ -97,7 +98,11 @@ function List() {
 
     const TableRows = Promise.all(
       data.map((item) => (
-        <tr className="fade-in" key={`${item.deviceSerialNumber}-list-item`}>
+        <tr
+          id={`list-item-${item.id}-${item.deviceSerialNumber}`}
+          className="fade-in"
+          key={`${item.deviceSerialNumber}-list-item`}
+        >
           <td>{item.deviceSerialNumber}</td>
           <td>{item.purchaseDate}</td>
           <td>{item.name}</td>
@@ -115,7 +120,10 @@ function List() {
           <td>
             <div className="flex items-center justify-center w-full gap-3">
               <EditButton id={item.id} />
-              <DeleteButton id={item.id} />
+              <DeleteButton
+                id={item.id}
+                deviceSerialNumber={item.deviceSerialNumber}
+              />
             </div>
           </td>
         </tr>
