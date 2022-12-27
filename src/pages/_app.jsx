@@ -11,8 +11,9 @@ import Header from '@/src/components/misc/Header';
 import Loader from '@/src/components/misc/Loader';
 import AuthPopup from '@/src/components/popups/AuthPopup';
 import AlertPopup from '@/src/components/popups/AlertPopup';
+import ChoosePopup from '@/src/components/popups/ChoosePopup';
+import ConfirmPopup from '@/src/components/popups/ConfirmPopup';
 import AddUserPopup from '@/src/components/popups/AddUserPopup';
-import ChoosePopup from '../components/popups/ChoosePopup';
 
 function App({ Component, pageProps }) {
   return (
@@ -22,6 +23,7 @@ function App({ Component, pageProps }) {
           <Header />
           <Loader />
           <AlertPopup />
+          <ConfirmPopup />
           <AuthPopup />
           <AddUserPopup />
           <ChoosePopup />
