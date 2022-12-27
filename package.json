@@ -10,10 +10,10 @@
     "name": "JAEGER"
   },
   "scripts": {
-    "dev": "NODE_ENV=development APIURL=https://api.zaxe.com next dev",
-    "dev:local": "NODE_ENV=development APIURL=http://localhost:3005/ next dev",
-    "build": "next build",
-    "start": "NODE_ENV=production APIURL=https://api.zaxe.com next strart",
+    "dev": "NODE_ENV=development next dev",
+    "dev:local": "NODE_ENV=development NEXT_PUBLIC_API_URL=http://localhost:3005/ next dev",
+    "build": "next build ",
+    "start": "NODE_ENV=production next start",
     "lint": "next lint"
   },
   "dependencies": {
