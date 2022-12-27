@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { BiEdit, BiTrashAlt } from 'react-icons/bi';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
@@ -128,7 +128,7 @@ function List() {
     return setTableRows(Empty);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const Init = async () => getTableRows();
 
     Init();
