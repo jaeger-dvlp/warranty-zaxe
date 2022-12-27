@@ -167,6 +167,12 @@
         "current-image": "Current Image",
         "not-selected": "Not selected"
       }
+    },
+    "confirm": {
+      "buttons": {
+        "yes": "Yes",
+        "cancel": "Cancel"
+      }
     }
   }
 }

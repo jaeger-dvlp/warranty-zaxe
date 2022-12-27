@@ -167,6 +167,12 @@
         "current-image": "Mevcut Resim",
         "not-selected": "Seçilmedi"
       }
+    },
+    "confirm": {
+      "buttons": {
+        "yes": "Evet",
+        "cancel": "Vazgeç"
+      }
     }
   }
 }
