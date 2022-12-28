@@ -2,13 +2,14 @@
 const path = require('path');
 const { i18n } = require('./next-i18next.config');
 
-const { APIURL } = process.env;
+const { NEXT_PUBLIC_API_URL: APIURL, NODE_ENV } = process.env;
 
 const nextConfig = {
   reactStrictMode: true,
   i18n,
   env: {
     APIURL,
+    APP_ENV: NODE_ENV || 'development',
   },
   webpack: (config, { isServer }) => {
     const customConfig = config;
