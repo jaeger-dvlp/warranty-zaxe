@@ -169,6 +169,12 @@
       }
     },
     "confirm": {
+      "labels": {
+        "logout": "Çıkış yapmak istediğinizden emin misiniz?",
+        "add-user": "Bu kullanıcıyı eklemek istediğinizden emin misiniz?",
+        "update": "Bu güncellemeyi yapmak istediğinizden emin misiniz?",
+        "add-warranty": "Bu garantiyi eklemek istediğinizden emin misiniz?"
+      },
       "buttons": {
         "yes": "Evet",
         "cancel": "Vazgeç"

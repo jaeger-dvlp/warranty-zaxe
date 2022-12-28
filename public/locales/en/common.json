@@ -169,6 +169,12 @@
       }
     },
     "confirm": {
+      "labels": {
+        "logout": "Are you sure you want to logout?",
+        "add-user": "Are you sure you want to add this user?",
+        "update": "Are you sure you want to update this record?",
+        "add-warranty": "Are you sure you want to add this warranty?"
+      },
       "buttons": {
         "yes": "Yes",
         "cancel": "Cancel"
