@@ -167,8 +167,7 @@ function LogoutButton() {
 
   const askToLogout = async () => {
     activateConfirmPopup({
-      title: t('popups.auth.confirm.logout.title'),
-      message: t('popups.auth.confirm.logout.message'),
+      message: t('popups.confirm.labels.logout'),
       onConfirm: () => {
         deactivateConfirmPopup();
         return signOut();
