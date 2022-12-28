@@ -92,6 +92,7 @@ function List() {
   const { t } = useTranslation();
   const router = useRouter();
   const supaBase = useSupabaseClient();
+
   const Fields = {
     deviceSerialNumber: t('forms.global.inputs.deviceSerialNumber.label'),
     purchaseDate: t('forms.global.inputs.purchaseDate.label'),
@@ -103,6 +104,8 @@ function List() {
     invoiceImage: t('forms.global.inputs.invoiceImage.label'),
     companyName: t('forms.global.inputs.companyName.label'),
     distributorName: t('forms.global.inputs.distributorName.label'),
+    actions: t('components.table.labels.actions'),
+    inspect: t('components.table.labels.inspect'),
   };
 
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -143,9 +146,7 @@ function List() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <span className="text-current">
-                  {t('components.table.labels.inspect')}
-                </span>
+                <span className="text-current">{Fields.inspect}</span>
                 <BiLinkExternal className="w-3 h-3 text-current" />
               </a>
             </td>
@@ -210,7 +211,7 @@ function List() {
               <th scope="col">{Fields.companyName}</th>
               <th scope="col">{Fields.distributorName}</th>
               <th scope="col" className="!text-right">
-                {t('components.table.labels.actions')}
+                {Fields.actions}
               </th>
             </tr>
           </thead>
