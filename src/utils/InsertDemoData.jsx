@@ -6,10 +6,7 @@ const APP_ENV = process.env.APP_ENV;
 
 const insertDemoRow = async ({ supaBase, onComplete = () => null }) => {
   try {
-    if (APP_ENV !== 'development') {
-      console.log(APP_ENV);
-      return false;
-    }
+    if (APP_ENV !== 'development') return false;
 
     const { error } = await supaBase.from('warrantyList').insert({
       deviceSerialNumber: getRandomSerial(),
