@@ -1,8 +1,8 @@
 import React from 'react';
 import { BsPlusLg } from 'react-icons/bs';
+import { BiInfoCircle } from 'react-icons/bi';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '@/src/contexts/AppWrapper';
-import { BiInfoCircle } from 'react-icons/bi';
 
 function ConfirmPopup() {
   const {

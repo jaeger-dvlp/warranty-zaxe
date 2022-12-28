@@ -1,5 +1,7 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import { BiLinkExternal } from 'react-icons/bi';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 import insertDemoRow from '@/src/utils/InsertDemoData';
@@ -8,8 +10,6 @@ import EditButton from '@/src/components/buttons/EditButton';
 import Pagination from '@/src/components/buttons/Pagination';
 import TableLoading from '@/src/components/misc/TableLoading';
 import DeleteButton from '@/src/components/buttons/DeleteButton';
-import { BiLinkExternal } from 'react-icons/bi';
-import { useRouter } from 'next/router';
 
 const TableElements = {
   loading: {

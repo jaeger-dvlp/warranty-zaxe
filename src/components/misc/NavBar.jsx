@@ -1,14 +1,15 @@
 import React from 'react';
-import {
-  BsBoxArrowInRight,
-  BsFillPersonPlusFill,
-  BsKeyFill,
-} from 'react-icons/bs';
 import { useTranslation } from 'next-i18next';
 import AuthService from '@/src/services/auth.service';
 import { useAppContext } from '@/src/contexts/AppWrapper';
 import { usePanelContext } from '@/src/contexts/PanelWrapper';
 import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+
+import {
+  BsBoxArrowInRight,
+  BsFillPersonPlusFill,
+  BsKeyFill,
+} from 'react-icons/bs';
 
 function NavBar() {
   const { activePanel, setActivePanel, panels } = usePanelContext();
