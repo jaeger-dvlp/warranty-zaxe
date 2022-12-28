@@ -132,7 +132,12 @@ function LogoutButton() {
   const { t } = useTranslation();
   const supabase = useSupabaseClient();
   const { setActivePanel } = usePanelContext();
-  const { activateAlertPopup, updateAlertPopup } = useAppContext();
+  const {
+    activateAlertPopup,
+    updateAlertPopup,
+    activateConfirmPopup,
+    deactivateConfirmPopup,
+  } = useAppContext();
 
   const signOut = async () => {
     try {
@@ -160,12 +165,23 @@ function LogoutButton() {
     }
   };
 
+  const askToLogout = async () => {
+    activateConfirmPopup({
+      title: t('popups.auth.confirm.logout.title'),
+      message: t('popups.auth.confirm.logout.message'),
+      onConfirm: () => {
+        deactivateConfirmPopup();
+        return signOut();
+      },
+    });
+  };
+
   if (!user) return null;
 
   return (
     <button
       onClick={async () => {
-        await signOut();
+        await askToLogout();
       }}
       className="bg-zinc-100 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-200 border text-zinc-600 flex items-center justify-center gap-1 p-1.5 font-semibold text-center transition-all duration-100  rounded-md ring-0 !ring-sky-400 active:ring"
       type="button"
