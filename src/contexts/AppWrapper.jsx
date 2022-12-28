@@ -38,6 +38,12 @@ export default function AppWrapper({ children }) {
     onCancel: () => {},
   });
 
+  const [editPopup, setEditPopup] = React.useState({
+    inHTML: false,
+    isActive: false,
+    item: null,
+  });
+
   const activateAlertPopup = ({ message, status }) => {
     if (!alertPopup.isActive && !alertPopup.inHTML) {
       setAlertPopup({
@@ -236,6 +242,42 @@ export default function AppWrapper({ children }) {
     );
   };
 
+  const activateEditPopup = ({ item }) => {
+    setEditPopup({
+      inHTML: true,
+      isActive: false,
+      item,
+    });
+
+    setTimeout(
+      () =>
+        setEditPopup({
+          inHTML: true,
+          isActive: true,
+          item,
+        }),
+      100
+    );
+  };
+
+  const deactivateEditPopup = () => {
+    setEditPopup({
+      inHTML: true,
+      isActive: false,
+      item: editPopup.item,
+    });
+
+    setTimeout(
+      () =>
+        setEditPopup({
+          inHTML: false,
+          isActive: false,
+          item: null,
+        }),
+      350
+    );
+  };
+
   const ContextData = React.useMemo(
     () => ({
       alertPopup,
@@ -243,19 +285,22 @@ export default function AppWrapper({ children }) {
       addUserPopup,
       choosePopup,
       confirmPopup,
+      editPopup,
       activateAlertPopup,
       activateAuthPopup,
       activateAddUserPopup,
       activateChoosePopup,
       activateConfirmPopup,
+      activateEditPopup,
       updateAlertPopup,
       deactivateAlertPopup,
       deactivateAuthPopup,
       deactivateAddUserPopup,
       deactivateChoosePopup,
       deactivateConfirmPopup,
+      deactivateEditPopup,
     }),
-    [alertPopup, authPopup, addUserPopup, choosePopup, confirmPopup]
+    [alertPopup, authPopup, addUserPopup, choosePopup, confirmPopup, editPopup]
   );
 
   return (
