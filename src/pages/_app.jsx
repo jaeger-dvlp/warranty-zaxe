@@ -10,6 +10,7 @@ import PanelWrapper from '@/src/contexts/PanelWrapper';
 import Header from '@/src/components/misc/Header';
 import Loader from '@/src/components/misc/Loader';
 import AuthPopup from '@/src/components/popups/AuthPopup';
+import EditPopup from '@/src/components/popups/EditPopup';
 import AlertPopup from '@/src/components/popups/AlertPopup';
 import ChoosePopup from '@/src/components/popups/ChoosePopup';
 import ConfirmPopup from '@/src/components/popups/ConfirmPopup';
@@ -27,6 +28,7 @@ function App({ Component, pageProps }) {
           <AuthPopup />
           <AddUserPopup />
           <ChoosePopup />
+          <EditPopup />
           <Component {...pageProps} />
         </PanelWrapper>
       </SupaWrapper>
