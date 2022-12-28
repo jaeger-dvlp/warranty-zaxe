@@ -1,8 +1,7 @@
 import React from 'react';
-import { BiAddToQueue, BiEdit, BiHome, BiListUl } from 'react-icons/bi';
+import { BiAddToQueue, BiHome, BiListUl } from 'react-icons/bi';
 
 import Add from '@/src/components/panels/Add';
-import Edit from '@/src/components/panels/Edit';
 import List from '@/src/components/panels/List';
 import Home from '@/src/components/panels/Home';
 
@@ -22,12 +21,6 @@ export default function PanelWrapper({ children }) {
       icon: BiAddToQueue,
       component: Add,
       requiresAuth: false,
-    },
-    {
-      name: 'components.navbar.buttons.edit',
-      icon: BiEdit,
-      component: Edit,
-      requiresAuth: true,
     },
     {
       name: 'components.navbar.buttons.list',
