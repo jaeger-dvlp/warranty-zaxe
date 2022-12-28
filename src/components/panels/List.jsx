@@ -8,6 +8,8 @@ import EditButton from '@/src/components/buttons/EditButton';
 import Pagination from '@/src/components/buttons/Pagination';
 import TableLoading from '@/src/components/misc/TableLoading';
 import DeleteButton from '@/src/components/buttons/DeleteButton';
+import { BiLinkExternal } from 'react-icons/bi';
+import { useRouter } from 'next/router';
 
 const TableElements = {
   loading: {
@@ -88,6 +90,7 @@ const lowerRange = async ({ currentPage, setCurrentPage, supaBase }) => {
 
 function List() {
   const { t } = useTranslation();
+  const router = useRouter();
   const supaBase = useSupabaseClient();
   const Fields = {
     deviceSerialNumber: t('forms.global.inputs.deviceSerialNumber.label'),
@@ -134,8 +137,16 @@ function List() {
             <td data-field="phoneNumber">{item.phoneNumber}</td>
             <td data-field="country">{item.country}</td>
             <td data-field="invoiceImage">
-              <a href={item.invoiceImage} target="_blank" rel="noreferrer">
-                Görüntüle
+              <a
+                className="flex items-center justify-start gap-1 text-sky-500 hover:underline"
+                href={item.invoiceImage}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="text-current">
+                  {t('components.table.labels.inspect')}
+                </span>
+                <BiLinkExternal className="w-3 h-3 text-current" />
               </a>
             </td>
             <td data-field="companyName">{item.companyName}</td>
@@ -164,9 +175,13 @@ function List() {
   };
 
   React.useEffect(() => {
+    setTableRows(TableElements.empty);
     setTableRows(TableElements.loading);
-    setTimeout(() => getTableRows(), 500);
-  }, [currentPage]);
+
+    new Promise((resolve) => {
+      setTimeout(resolve, 750);
+    }).then(() => getTableRows());
+  }, [currentPage, router]);
 
   return (
     <div className="relative flex flex-wrap items-center justify-center w-full gap-0 p-5 bg-white border shadow-xl warranty-list-table-container fade-in rounded-xl font-zaxe border-zinc-100">
@@ -195,7 +210,7 @@ function List() {
               <th scope="col">{Fields.companyName}</th>
               <th scope="col">{Fields.distributorName}</th>
               <th scope="col" className="!text-right">
-                Actions
+                {t('components.table.labels.actions')}
               </th>
             </tr>
           </thead>
