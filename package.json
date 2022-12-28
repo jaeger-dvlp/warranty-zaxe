@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "NODE_ENV=development next dev",
-    "dev:local": "NODE_ENV=development NEXT_PUBLIC_API_URL=http://localhost:3005/ next dev",
+    "dev:local": "NODE_ENV=development NEXT_PUBLIC_API_URL=http://localhost:3005/v1/ next dev",
     "build": "next build ",
     "start": "NODE_ENV=production next start",
     "lint": "next lint"
