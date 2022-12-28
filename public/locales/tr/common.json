@@ -30,6 +30,12 @@
         "edit": "Düzenle",
         "list": "Liste"
       }
+    },
+    "table": {
+      "labels": {
+        "inspect": "İncele",
+        "actions": "İşlemler"
+      }
     }
   },
   "forms": {
@@ -166,6 +172,17 @@
       "label": {
         "current-image": "Mevcut Resim",
         "not-selected": "Seçilmedi"
+      }
+    },
+    "upload": {
+      "success": {
+        "sent-invoice-warranty-record": "Fatura ve garanti kaydı başarıyla oluşturuldu!"
+      },
+      "loading": {
+        "sending-invoice-warranty-record": "Fatura ve garanti kaydı oluşturuluyor..."
+      },
+      "errors": {
+        "serial-number-exists": "Bu seri numarası daha önce kayıt edilmiş."
       }
     },
     "confirm": {
