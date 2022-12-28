@@ -6,8 +6,23 @@ import Countries from '@/src/data/countryStates.json';
 import firstUpperCase from '@/src/utils/FirstUpperCase';
 import { useAppContext } from '@/src/contexts/AppWrapper';
 
+const getInvoiceImageName = ({
+  name,
+  surname,
+  deviceSerialNumber,
+  invoiceImage: { type },
+}) => {
+  const str = `${deviceSerialNumber}_${name
+    .replace(' ', '_')
+    .toLowerCase()}_${surname.replace(' ', '_').toLowerCase()}.${
+    type.split('/')[1]
+  }`;
+
+  return str;
+};
+
 function DefaultForm({
-  onSubmit = () => null,
+  onSubmit = async () => null,
   formName = 'a-default-form',
   formPrefix = 'default',
 }) {
@@ -28,7 +43,7 @@ function DefaultForm({
     distributorName: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const isBodyValid = Object.keys(requestBody).map((key) => {
       if (!requestBody[key] || requestBody[key] === '') {
@@ -43,18 +58,23 @@ function DefaultForm({
 
     if (!isBodyValid.includes(false)) {
       const body = {
-        fullName: `${requestBody.name} ${requestBody.surname}`,
+        name: requestBody.name,
+        surname: requestBody.surname,
         purchaseDate: requestBody.purchaseDate,
         deviceSerialNumber: requestBody.deviceSerialNumber,
         emailAddress: requestBody.emailAddress,
         phoneNumber: requestBody.phoneNumber,
         country: requestBody.country,
-        invoiceImage: requestBody.invoiceImage,
+        invoiceImage: {
+          name: getInvoiceImageName(requestBody),
+          type: invoiceImage?.type,
+          value: invoiceImage?.value,
+        },
         companyName: requestBody.companyName,
         distributorName: requestBody.distributorName,
       };
 
-      return onSubmit(body);
+      await onSubmit(body);
     }
     return null;
   };
