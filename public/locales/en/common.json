@@ -30,6 +30,12 @@
         "edit": "Edit",
         "list": "List"
       }
+    },
+    "table": {
+      "labels": {
+        "inspect": "Inspect",
+        "actions": "Actions"
+      }
     }
   },
   "forms": {
@@ -166,6 +172,17 @@
       "label": {
         "current-image": "Current Image",
         "not-selected": "Not selected"
+      }
+    },
+    "upload": {
+      "success": {
+        "sent-invoice-warranty-record": "Invoice and warranty record sent successfully!"
+      },
+      "loading": {
+        "sending-invoice-warranty-record": "Creating invoice and warranty record..."
+      },
+      "errors": {
+        "serial-number-exists": "Serial number already exists."
       }
     },
     "confirm": {
