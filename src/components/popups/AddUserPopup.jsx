@@ -13,6 +13,8 @@ function AddUserPopup({ formPrefix = 'add-user-popup' }) {
     deactivateAddUserPopup,
     activateAlertPopup,
     updateAlertPopup,
+    activateConfirmPopup,
+    deactivateConfirmPopup,
   } = useAppContext();
 
   const { t } = useTranslation();
@@ -23,9 +25,8 @@ function AddUserPopup({ formPrefix = 'add-user-popup' }) {
     password: '',
   });
 
-  const addUser = async (e) => {
+  const addUser = async () => {
     try {
-      e.preventDefault();
       activateAlertPopup({
         status: 'loading',
         message: 'Creating user..',
@@ -74,7 +75,7 @@ function AddUserPopup({ formPrefix = 'add-user-popup' }) {
         });
       }
       return activateAlertPopup({
-        message: t('popups.global.errors.invalid-field'),
+        smessage: t('popups.global.errors.invalid-field'),
         status: 'error',
       });
     } catch (error) {
@@ -85,6 +86,16 @@ function AddUserPopup({ formPrefix = 'add-user-popup' }) {
     }
   };
 
+  const askToConfirm = (e) => {
+    e.preventDefault();
+    activateConfirmPopup({
+      message: t('popups.confirm.labels.add-user'),
+      onConfirm: () => {
+        deactivateConfirmPopup();
+        return addUser();
+      },
+    });
+  };
   return (
     inHTML && (
       <div
@@ -105,7 +116,7 @@ function AddUserPopup({ formPrefix = 'add-user-popup' }) {
             </span>
           </div>
           <form
-            onSubmit={addUser}
+            onSubmit={askToConfirm}
             className="grid w-full grid-cols-1 gap-5 adduser-form fade-in place-content-start place-items-start"
           >
             <section className="relative w-full">
@@ -138,6 +149,13 @@ function AddUserPopup({ formPrefix = 'add-user-popup' }) {
               </Label>
             </section>
             <section className="relative flex items-center justify-end w-full gap-5">
+              <button
+                type="button"
+                className="p-2 transition-all duration-150 rounded-md ring-transparent ring-2 text-zinc-600 hover:text-zinc-800"
+                onClick={() => deactivateAddUserPopup()}
+              >
+                {t('popups.confirm.buttons.cancel')}
+              </button>
               <button
                 type="submit"
                 className="p-2 px-5 text-white transition-all duration-200 border-b-4 active:mb-[4px] mb-0 rounded-md active:border-b-0 active:translate-y-[4px] bg-zaxe hover:bg-sky-600 border-b-sky-700"
