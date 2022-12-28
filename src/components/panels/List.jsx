@@ -1,59 +1,46 @@
 import React from 'react';
-import { uuid } from 'uuidv4';
 import { useTranslation } from 'next-i18next';
-import {
-  BiEdit,
-  BiTrashAlt,
-  BiChevronLeft,
-  BiChevronRight,
-} from 'react-icons/bi';
-import { useAppContext } from '@/src/contexts/AppWrapper';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
-const getRandomSerial = () =>
-  `ZX${uuid().slice(0, 13).replace(/-/g, '').toUpperCase()}`;
+import insertDemoRow from '@/src/utils/InsertDemoData';
+import TableEmpty from '@/src/components/misc/TableEmpty';
+import EditButton from '@/src/components/buttons/EditButton';
+import Pagination from '@/src/components/buttons/Pagination';
+import TableLoading from '@/src/components/misc/TableLoading';
+import DeleteButton from '@/src/components/buttons/DeleteButton';
 
-function Loading() {
-  return (
-    <tr className="relative w-full fade-in">
-      <td colSpan="11" className="">
-        <div className="relative min-h-[275px] flex items-center w-full h-full p-5">
-          <p className="sticky -translate-x-1/2 left-1/2 top-1/2">Loading...</p>
-        </div>
-      </td>
-    </tr>
-  );
-}
-
-function Empty() {
-  return (
-    <tr className="w-full fade-in">
-      <td colSpan="11" className="">
-        <div className="relative min-h-[275px] flex items-center w-full h-full p-5">
-          <p className="sticky -translate-x-1/2 left-1/2 top-1/2">Empty.</p>
-        </div>
-      </td>
-    </tr>
-  );
-}
+const TableElements = {
+  loading: {
+    name: 'TableLoading',
+    component: <TableLoading />,
+  },
+  empty: {
+    name: 'TableEmpty',
+    component: <TableEmpty />,
+  },
+  list: {
+    name: 'TableList',
+    component: null,
+  },
+};
 
 const getPagination = (page, limit = 5) => {
-  const Pagination = {
+  const pagination = {
     from: page * limit - limit + 1,
     to: page * limit || limit,
   };
 
-  if (Pagination.from === 1) {
-    Pagination.from = 0;
-    Pagination.to -= 1;
+  if (pagination.from === 1) {
+    pagination.from = 0;
+    pagination.to -= 1;
   }
 
-  if (Pagination.from > 1) {
-    Pagination.from -= 1;
-    Pagination.to -= 1;
+  if (pagination.from > 1) {
+    pagination.from -= 1;
+    pagination.to -= 1;
   }
 
-  return Pagination;
+  return pagination;
 };
 
 const isRangeValid = async ({ currentPage, supaBase }) => {
@@ -68,126 +55,6 @@ const isRangeValid = async ({ currentPage, supaBase }) => {
     if (error || data?.length === 0) return false;
 
     return data;
-  } catch (error) {
-    return false;
-  }
-};
-
-const deleteItem = async ({
-  id,
-  deviceSerialNumber,
-  supaBase,
-  getTableRows,
-  activateAlertPopup,
-}) => {
-  try {
-    const { error } = await supaBase
-      .from('warrantyList')
-      .delete()
-      .match({ id });
-
-    const TableElement = document.querySelector(
-      `tr#list-item-${id}-${deviceSerialNumber}`
-    );
-
-    if (error)
-      return activateAlertPopup({
-        status: 'error',
-        message: error?.message || 'An error occurred while deleting the item',
-      });
-
-    if (TableElement)
-      TableElement.classList.add('max-h-[0px]', 'opacity-0', 'overflow-hidden');
-
-    activateAlertPopup({
-      status: 'success',
-      message: 'Item deleted successfully.',
-    });
-
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(), 500);
-    }).then(() => getTableRows());
-  } catch (error) {
-    return false;
-  }
-};
-
-function DeleteButton({ id, deviceSerialNumber, getTableRows }) {
-  const supaBase = useSupabaseClient();
-  const { activateAlertPopup, activateConfirmPopup, deactivateConfirmPopup } =
-    useAppContext();
-
-  const handleClick = () => {
-    try {
-      return activateConfirmPopup({
-        message: 'Are you sure you want to delete this item?',
-        onConfirm: () => {
-          deactivateConfirmPopup();
-          activateAlertPopup({
-            status: 'loading',
-            message: 'Deleting item...',
-          });
-
-          return deleteItem({
-            id,
-            deviceSerialNumber,
-            getTableRows,
-            supaBase,
-            activateAlertPopup,
-          });
-        },
-      });
-    } catch (error) {
-      return false;
-    }
-  };
-
-  return (
-    <button
-      type="button"
-      className="flex items-center justify-center p-1 bg-white border-2 rounded-md border-zinc-300 text-zinc-600 hover:bg-zinc-100"
-      onClick={handleClick}
-    >
-      <BiTrashAlt className="w-4 h-4" />
-    </button>
-  );
-}
-
-function EditButton({ id }) {
-  return (
-    <button
-      type="button"
-      className="flex items-center justify-center p-1 bg-white border-2 rounded-md border-zinc-300 text-zinc-600 hover:bg-zinc-100"
-      onClick={() => id}
-    >
-      <BiEdit className="w-4 h-4" />
-    </button>
-  );
-}
-
-const insertDemoRow = async ({ supaBase, getTableRows }) => {
-  try {
-    const { error } = await supaBase.from('warrantyList').insert({
-      deviceSerialNumber: getRandomSerial(),
-      purchaseDate: '22/12/2020',
-      name: 'John',
-      surname: 'Doe',
-      emailAddress: 'john.doe@example.com',
-      phoneNumber: '+90 555 555 55 55',
-      country: 'Germany',
-      invoiceImage:
-        'https://drive.google.com/file/d/1h0wjsiXhDxE5WDtAboQ3WQAM5AIxYdCh/view?usp=share_link',
-      companyName: 'Example Ltd.',
-      distributorName: 'Zaxe3D',
-    });
-
-    if (error) {
-      throw new Error(
-        error?.message || 'An error occurred while inserting row.'
-      );
-    }
-
-    return getTableRows();
   } catch (error) {
     return false;
   }
@@ -236,10 +103,7 @@ function List() {
   };
 
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [tableRows, setTableRows] = React.useState({
-    name: 'loading',
-    data: <Loading />,
-  });
+  const [tableRows, setTableRows] = React.useState(TableElements.loading);
 
   const getTableRows = async () => {
     try {
@@ -250,7 +114,7 @@ function List() {
           return setCurrentPage(currentPage - 1);
         }
 
-        return setTableRows({ name: 'empty', data: <Empty /> });
+        return setTableRows(TableElements.empty);
       }
 
       const TableRows = Promise.all(
@@ -291,8 +155,8 @@ function List() {
       );
 
       return setTableRows({
-        name: 'warrantyList',
-        data: await TableRows,
+        name: TableElements.list.name,
+        component: await TableRows,
       });
     } catch (error) {
       return false;
@@ -300,30 +164,27 @@ function List() {
   };
 
   React.useEffect(() => {
-    setTableRows({
-      name: 'loading',
-      data: <Loading />,
-    });
+    setTableRows(TableElements.loading);
     setTimeout(() => getTableRows(), 500);
   }, [currentPage]);
 
   return (
     <div className="relative flex flex-wrap items-center justify-center w-full gap-0 p-5 bg-white border shadow-xl warranty-list-table-container fade-in rounded-xl font-zaxe border-zinc-100">
-      <div className="relative flex items-center justify-center w-full p-0 pt-5" />
-      <div className="sticky left-0 flex items-center justify-start w-full gap-5 mb-5">
-        <button
-          type="button"
-          onClick={() => insertDemoRow({ supaBase, getTableRows })}
-          className="flex items-center justify-center px-2 py-1 text-xs bg-white border-2 rounded-md border-zinc-300 text-zinc-600 hover:bg-zinc-100"
-        >
-          + Mock Record
-        </button>
-      </div>
       <div className="overflow-x-auto relative shadow-md rounded-md max-h-[550px]">
         <table className="w-full warranty-list-table">
           <thead>
             <tr>
-              <th scope="col">{Fields.deviceSerialNumber}</th>
+              <th
+                onClick={async () => {
+                  await insertDemoRow({
+                    supaBase,
+                    onComplete: () => getTableRows(),
+                  });
+                }}
+                scope="col"
+              >
+                {Fields.deviceSerialNumber}
+              </th>
               <th scope="col">{Fields.purchaseDate}</th>
               <th scope="col">{Fields.name}</th>
               <th scope="col">{Fields.surname}</th>
@@ -338,45 +199,19 @@ function List() {
               </th>
             </tr>
           </thead>
-          <tbody>{tableRows.data}</tbody>
+          <tbody>{tableRows.component}</tbody>
         </table>
       </div>
-      <nav
-        className="flex items-center justify-center p-0 m-5 mb-0 rounded-md shadow-lg "
-        aria-label="Table navigation"
-      >
-        <ul className="inline-flex items-center">
-          <li>
-            <button
-              type="button"
-              disabled={tableRows.name === 'loading'}
-              onClick={() =>
-                upperRange({ supaBase, currentPage, setCurrentPage })
-              }
-              className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg disabled:pointer-events-none hover:bg-gray-100 hover:text-gray-700 "
-            >
-              <BiChevronLeft className="w-5 h-5" />
-            </button>
-          </li>
-          <li>
-            <span className="block h-full px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border-gray-300 border-y hover:bg-gray-100 hover:text-gray-700">
-              {currentPage}
-            </span>
-          </li>
-          <li>
-            <button
-              type="button"
-              disabled={tableRows.name === 'loading'}
-              onClick={() =>
-                lowerRange({ supaBase, currentPage, setCurrentPage })
-              }
-              className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg disabled:pointer-events-none hover:bg-gray-100 hover:text-gray-700 "
-            >
-              <BiChevronRight className="w-5 h-5" />
-            </button>
-          </li>
-        </ul>
-      </nav>
+      <Pagination
+        props={{
+          supaBase,
+          currentPage,
+          setCurrentPage,
+          tableRows,
+          upperRange,
+          lowerRange,
+        }}
+      />
     </div>
   );
 }
