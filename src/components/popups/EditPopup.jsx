@@ -25,7 +25,6 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
 
   React.useEffect(() => {
     if (item && item.id) {
-      console.log(item);
       setOldItem(item);
       setUpdatedItem(item);
     }
