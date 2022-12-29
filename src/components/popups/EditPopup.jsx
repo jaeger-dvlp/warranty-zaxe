@@ -4,25 +4,28 @@ import Classes from '@/src/utils/Classes';
 import { useTranslation } from 'next-i18next';
 import Label from '@/src/components/misc/Label';
 import Countries from '@/src/data/countryStates.json';
-import { useAppContext } from '@/src/contexts/AppWrapper';
 import firstUpperCase from '@/src/utils/FirstUpperCase';
+import { useAppContext } from '@/src/contexts/AppWrapper';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 function EditPopup({ formPrefix = 'edit-popup-form' }) {
   const {
-    editPopup: { inHTML, isActive, item },
+    editPopup: { inHTML, isActive, item, onEditComplete },
     deactivateEditPopup,
     activateAlertPopup,
+    updateAlertPopup,
     activateConfirmPopup,
     deactivateConfirmPopup,
   } = useAppContext();
 
   const { t } = useTranslation();
-
+  const supaBase = useSupabaseClient();
   const [oldItem, setOldItem] = React.useState({});
   const [updatedItem, setUpdatedItem] = React.useState({});
 
   React.useEffect(() => {
     if (item && item.id) {
+      console.log(item);
       setOldItem(item);
       setUpdatedItem(item);
     }
@@ -33,13 +36,55 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
     };
   }, [item?.id]);
 
-  const askToUpdate = () => {};
+  const updateData = async () => {
+    deactivateConfirmPopup();
+    activateAlertPopup({
+      status: 'loading',
+      message: t('popups.edit.loading.update'),
+    });
+
+    const { error } = await supaBase
+      .from('warrantyList')
+      .update(updatedItem)
+      .match({ id: updatedItem.id })
+      .select();
+
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (error) return reject();
+
+        return resolve();
+      }, 1000);
+    })
+      .then(() => {
+        onEditComplete();
+        updateAlertPopup({
+          status: 'success',
+          message: t('popups.edit.success.update'),
+        });
+      })
+      .catch(() =>
+        updateAlertPopup({
+          status: 'error',
+          message: error?.message || t('popups.edit.error.update'),
+        })
+      )
+      .finally(() => deactivateEditPopup());
+  };
+
+  const askToUpdate = async (e) => {
+    e.preventDefault();
+    return activateConfirmPopup({
+      message: t('popups.confirm.labels.sure-to-update'),
+      onConfirm: updateData,
+      onCancel: deactivateConfirmPopup,
+    });
+  };
 
   const handleDeactivate = () => {
     if (oldItem !== updatedItem) {
-      // return ask to confirm
       return activateConfirmPopup({
-        message: t('popups.global.confirmation.update'),
+        message: t('popups.confirm.labels.sure-to-cancel'),
         onConfirm: () => {
           deactivateEditPopup();
           return deactivateConfirmPopup();
@@ -199,7 +244,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 className={Classes.input}
                 id={`${formPrefix}-emailAddress`}
                 placeholder=" "
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$"
                 required
                 onInvalid={(e) =>
                   e.target.setCustomValidity(
@@ -244,7 +289,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                   )
                 }
                 className={`${Classes.input} min-h-[56px]`}
-                defaultValue={updatedItem.country}
+                value={updatedItem.country}
               >
                 <option disabled value="">
                   {t('forms.global.inputs.country.label')} *
