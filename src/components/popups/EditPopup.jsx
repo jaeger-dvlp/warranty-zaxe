@@ -22,10 +22,15 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
   const [updatedItem, setUpdatedItem] = React.useState({});
 
   React.useEffect(() => {
-    if (item?.id) {
+    if (item && item.id) {
       setOldItem(item);
       setUpdatedItem(item);
     }
+
+    return () => {
+      setOldItem({});
+      setUpdatedItem({});
+    };
   }, [item?.id]);
 
   const askToUpdate = () => {};
@@ -69,17 +74,16 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
   };
 
   return (
-    inHTML &&
-    updatedItem && (
+    inHTML && (
       <div
         onClick={handleDeactivate}
-        className={`fixed adduser-popup-container font-mark transition-all duration-300 top-0 left-0 z-[9999999] flex items-center justify-center w-full h-full p-5 bg-black/50  ${
+        className={`fixed edit-popup-container font-mark transition-all duration-300 top-0 left-0 z-[9999999] flex items-center justify-center w-full h-full p-5 bg-black/50  ${
           isActive ? 'opacity-100 visible' : 'opacity-0 invisible'
         } `}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`grid relative w-full adduser-popup max-w-xl grid-cols-1 gap-10 p-5 transition-all duration-[0.3s] bg-white rounded-xl shadow-2xl shadow-black/40 place-content-between place-items-center ${
+          className={`grid relative w-full max-h-[85vh] overflow-auto edit-popup max-w-xl grid-cols-1 gap-10 p-5 transition-all duration-[0.3s] bg-white rounded-xl shadow-2xl shadow-black/40 place-content-between place-items-center ${
             isActive ? 'translate-y-0' : 'translate-y-10'
           }`}
         >
@@ -90,7 +94,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
           </div>
           <form
             onSubmit={askToUpdate}
-            className="grid w-full xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-5 edit-form fade-in place-content-start place-items-start"
+            className="grid w-full grid-cols-1 gap-5 xl:grid-cols-2 lg:grid-cols-2 edit-form fade-in place-content-start place-items-start"
           >
             <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
               <input
@@ -132,11 +136,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                     t('forms.global.inputs.purchaseDate.invalid')
                   )
                 }
-                onChange={(e) => {
-                  const Event = e;
-                  Event.target.value = firstUpperCase(Event.target.value);
-                  HandleChange(Event);
-                }}
+                onChange={HandleChange}
                 defaultValue={updatedItem.purchaseDate}
               />
               <Label required htmlFor={`${formPrefix}-purchaseDate`}>
@@ -226,11 +226,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                     t('forms.global.inputs.phoneNumber.invalid')
                   )
                 }
-                onChange={(e) => {
-                  const Event = e;
-                  Event.target.value = firstUpperCase(Event.target.value);
-                  HandleChange(Event);
-                }}
+                onChange={HandleChange}
                 defaultValue={updatedItem.phoneNumber}
               />
               <Label required htmlFor={`${formPrefix}-phoneNumber`}>
@@ -261,8 +257,25 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 ))}
               </select>
             </section>
-            <section className="relative h-[3.5rem] w-full xl:col-span-1 lg:col-span-1 border-none rounded-md font-semibold text-slate-500  col-span-full flex justify-center items-center flex-nowrap">
-              imagearea
+            <section className="relative w-full xl:col-span-1 lg:col-span-1 col-span-full">
+              <input
+                required
+                type="url"
+                placeholder=" "
+                minLength={2}
+                id={`${formPrefix}-invoiceImage`}
+                onInvalid={(e) =>
+                  e.target.setCustomValidity(
+                    t('forms.global.inputs.invoiceImageURL.invalid')
+                  )
+                }
+                onChange={HandleChange}
+                className={Classes.input}
+                defaultValue={updatedItem.invoiceImage}
+              />
+              <Label required htmlFor={`${formPrefix}-invoiceImage`}>
+                {t('forms.global.inputs.invoiceImageURL.label')}
+              </Label>
             </section>
             <section className="relative w-full col-span-full">
               <input
