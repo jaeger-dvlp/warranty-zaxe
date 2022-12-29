@@ -58,6 +58,7 @@ table.warranty-list-table > tbody tr td {
   @apply !py-4 !px-6;
 }
 
-table.warranty-list-table td[data-field='phoneNumber'] {
+table.warranty-list-table td[data-field='phoneNumber'],
+table.warranty-list-table td[data-field='name'] {
   @apply !whitespace-nowrap;
 }
