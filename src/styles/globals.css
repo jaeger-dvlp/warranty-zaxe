@@ -39,6 +39,14 @@ table.warranty-list-table thead th {
   @apply px-6 py-3 whitespace-nowrap;
 }
 
+table.warranty-list-table thead th:last-child {
+  @apply !text-right;
+}
+
+table.warranty-list-table tbody td:last-child {
+  @apply !text-right;
+}
+
 table.warranty-list-table > tbody tr {
   @apply transition-all duration-200 ease-in-out bg-white border-b hover:bg-gray-50;
 }

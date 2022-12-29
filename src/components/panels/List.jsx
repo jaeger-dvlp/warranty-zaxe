@@ -210,9 +210,7 @@ function List() {
               <th scope="col">{Fields.invoiceImage}</th>
               <th scope="col">{Fields.companyName}</th>
               <th scope="col">{Fields.distributorName}</th>
-              <th scope="col" className="!text-right">
-                {Fields.actions}
-              </th>
+              <th scope="col">{Fields.actions}</th>
             </tr>
           </thead>
           <tbody>{tableRows.component}</tbody>
