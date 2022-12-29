@@ -65,7 +65,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
       .catch(() =>
         updateAlertPopup({
           status: 'error',
-          message: error?.message || t('popups.edit.error.update'),
+          message: error?.message || t('popups.edit.errors.update'),
         })
       )
       .finally(() => deactivateEditPopup());
