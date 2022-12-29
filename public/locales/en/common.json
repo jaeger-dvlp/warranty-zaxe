@@ -210,7 +210,7 @@
       "loading": {
         "update": "Updating record..."
       },
-      "error": {
+      "errors": {
         "update": "An error occurred while updating record."
       }
     }

@@ -210,7 +210,7 @@
       "loading": {
         "update": "Kayıt güncelleniyor..."
       },
-      "error": {
+      "errors": {
         "update": "Kayıt güncellenirken bir hata oluştu."
       }
     }
