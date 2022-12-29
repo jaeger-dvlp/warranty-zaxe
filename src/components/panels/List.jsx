@@ -154,7 +154,7 @@ function List() {
             <td data-field="distributorName">{item.distributorName}</td>
             <td>
               <div className="flex items-center justify-center w-full gap-3">
-                <EditButton item={item} />
+                <EditButton item={item} onEditComplete={getTableRows} />
                 <DeleteButton
                   id={item.id}
                   deviceSerialNumber={item.deviceSerialNumber}
