@@ -234,7 +234,7 @@ export default function AppWrapper({ children }) {
         setConfirmPopup({
           inHTML: false,
           isActive: false,
-          message: '',
+          message: confirmPopup.message,
           onConfirm: () => {},
           onCancel: () => {},
         }),
@@ -242,10 +242,11 @@ export default function AppWrapper({ children }) {
     );
   };
 
-  const activateEditPopup = ({ item }) => {
+  const activateEditPopup = ({ item, onEditComplete }) => {
     setEditPopup({
       inHTML: true,
       isActive: false,
+      onEditComplete,
       item,
     });
 
@@ -254,6 +255,7 @@ export default function AppWrapper({ children }) {
         setEditPopup({
           inHTML: true,
           isActive: true,
+          onEditComplete,
           item,
         }),
       100
@@ -264,6 +266,7 @@ export default function AppWrapper({ children }) {
     setEditPopup({
       inHTML: true,
       isActive: false,
+      onEditComplete: editPopup.onEditComplete,
       item: editPopup.item,
     });
 
@@ -272,6 +275,7 @@ export default function AppWrapper({ children }) {
         setEditPopup({
           inHTML: false,
           isActive: false,
+          onEditComplete: () => {},
           item: null,
         }),
       350
