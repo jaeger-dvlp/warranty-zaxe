@@ -194,11 +194,24 @@
         "logout": "Çıkış yapmak istediğinizden emin misiniz?",
         "add-user": "Bu kullanıcıyı eklemek istediğinizden emin misiniz?",
         "update": "Bu güncellemeyi yapmak istediğinizden emin misiniz?",
-        "add-warranty": "Bu garantiyi eklemek istediğinizden emin misiniz?"
+        "add-warranty": "Bu garantiyi eklemek istediğinizden emin misiniz?",
+        "sure-to-update": "Bu güncellemeyi yapmak istediğinizden emin misiniz?",
+        "sure-to-cancel": "Düzenleme işlemini iptal etmek istediğinizden emin misiniz? Kaydedilmemiş değişiklikler kaybolacak."
       },
       "buttons": {
         "yes": "Evet",
         "cancel": "Vazgeç"
+      }
+    },
+    "edit": {
+      "success": {
+        "update": "Kayıt başarıyla güncellendi."
+      },
+      "loading": {
+        "update": "Kayıt güncelleniyor..."
+      },
+      "error": {
+        "update": "Kayıt güncellenirken bir hata oluştu."
       }
     }
   }

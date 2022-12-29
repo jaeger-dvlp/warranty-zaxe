@@ -194,11 +194,24 @@
         "logout": "Are you sure you want to logout?",
         "add-user": "Are you sure you want to add this user?",
         "update": "Are you sure you want to update this record?",
-        "add-warranty": "Are you sure you want to add this warranty?"
+        "add-warranty": "Are you sure you want to add this warranty?",
+        "sure-to-update": "Are you sure you want to update this record?",
+        "sure-to-cancel": "Are you sure you want cancel? All changes will be lost."
       },
       "buttons": {
         "yes": "Yes",
         "cancel": "Cancel"
+      }
+    },
+    "edit": {
+      "success": {
+        "update": "Record updated successfully."
+      },
+      "loading": {
+        "update": "Updating record..."
+      },
+      "error": {
+        "update": "An error occurred while updating record."
       }
     }
   }
