@@ -73,6 +73,10 @@
           "label": "Fatura Resmi",
           "invalid": "Zorunlu."
         },
+        "invoiceImageURL": {
+          "label": "Fatura Resim URL'si",
+          "invalid": "Zorunlu."
+        },
         "companyName": {
           "label": "Şirket İsmi",
           "invalid": "Minimum 2 karakter, zorunlu."

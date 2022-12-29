@@ -73,6 +73,10 @@
           "label": "Invoice Image",
           "invalid": "Required."
         },
+        "invoiceImageURL": {
+          "label": "Invoice Image URL",
+          "invalid": "Required."
+        },
         "companyName": {
           "label": "Company Name",
           "invalid": "Minimum 2 characters, required."
