@@ -29,18 +29,31 @@ class FormService {
 
       if (fileErr) throw Error(fileErr?.message || 'Error uploading file.');
 
-      const { data: supaData, error: supaErr } = await supaBase
-        .from('warrantyList')
-        .insert({
-          ...this.body,
-          invoiceImage: fileURL,
-        });
+      const supaInsert = await supaBase.from('warrantyList').insert({
+        ...this.body,
+        invoiceImage: fileURL,
+      });
 
-      if (supaErr) throw Error(supaErr?.message || 'Error inserting data.');
+      if (supaInsert?.error)
+        throw Error(supaInsert?.error?.message || 'Error inserting data.');
 
-      return supaData;
+      return fileURL;
     } catch (error) {
       throw Error(error?.message || 'Error sending warranty form.');
+    }
+  }
+
+  async registerWithMail({ body }) {
+    try {
+      this.body = body;
+      const { status } = await this.api.post('/warranty/register', this.body);
+
+      if (status === 'error')
+        throw Error(status?.message || 'Error registering with mail.');
+
+      return true;
+    } catch (error) {
+      throw Error(error?.message || 'Error registering with mail.');
     }
   }
 }

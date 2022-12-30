@@ -21,14 +21,21 @@ function Add() {
         () =>
           formService
             .sendWarrantyForm({ body, supaBase, t })
-            .then(() =>
+            .then((res) => {
               updateAlertPopup({
                 status: 'success',
                 message: t(
                   'popups.upload.success.sent-invoice-warranty-record'
                 ),
-              })
-            )
+              });
+
+              formService.registerWithMail({
+                body: {
+                  ...body,
+                  invoiceImage: res,
+                },
+              });
+            })
             .catch((err) =>
               updateAlertPopup({
                 status: 'error',
