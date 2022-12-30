@@ -2,6 +2,7 @@ import React from 'react';
 import { BiImageAdd } from 'react-icons/bi';
 import { i18n, useTranslation } from 'next-i18next';
 import { useAppContext } from '@/src/contexts/AppWrapper';
+import { BsPlusLg } from 'react-icons/bs';
 
 function ChoosePopup() {
   const {
@@ -27,10 +28,13 @@ function ChoosePopup() {
       activateState(file);
       setCurrentImage(file);
 
-      return activateAlertPopup({
+      activateAlertPopup({
         status: 'success',
         message: t('popups.choose.success.image-selected'),
       });
+      return setTimeout(() => {
+        deactivateChoosePopup();
+      }, 150);
     }
     return null;
   };
@@ -172,6 +176,13 @@ function ChoosePopup() {
             isActive ? 'translate-y-0' : 'translate-y-10'
           }`}
         >
+          <button
+            className="absolute ring-2 ring-transparent active:ring-sky-400 w-7 h-7 p-0 hover:bg-zinc-300 transition-all duration-150 bg-zinc-200 text-zinc-600 rounded-md m-0 flex justify-center items-center top-2.5 right-2.5"
+            type="button"
+            onClick={deactivateChoosePopup}
+          >
+            <BsPlusLg className="rotate-45" />
+          </button>
           <div className="flex items-center justify-center w-full">
             <span className="relative flex items-center justify-center w-12 h-12 p-2 rounded-lg bg-zinc-200">
               <BiImageAdd className="w-full h-full text-zinc-700" />
