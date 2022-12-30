@@ -8,6 +8,19 @@ import firstUpperCase from '@/src/utils/FirstUpperCase';
 import { useAppContext } from '@/src/contexts/AppWrapper';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
+const getDateSeperator = (date) => {
+  if (date.includes('/')) {
+    return '/';
+  }
+  if (date.includes('-')) {
+    return '-';
+  }
+  if (date.includes('.')) {
+    return '.';
+  }
+  return '';
+};
+
 function EditPopup({ formPrefix = 'edit-popup-form' }) {
   const {
     editPopup: { inHTML, isActive, item, onEditComplete },
@@ -73,6 +86,18 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
 
   const askToUpdate = async (e) => {
     e.preventDefault();
+
+    const body = updatedItem;
+
+    const dateSeperator = getDateSeperator(body.purchaseDate);
+    const PurchaseDate = body.purchaseDate.split(dateSeperator);
+    if (PurchaseDate[2] > new Date().getFullYear()) {
+      return activateAlertPopup({
+        message: t('popups.global.errors.invalid-date'),
+        status: 'error',
+      });
+    }
+
     return activateConfirmPopup({
       message: t('popups.confirm.labels.sure-to-update'),
       onConfirm: updateData,
@@ -146,7 +171,8 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 className={Classes.input}
                 id={`${formPrefix}-deviceSerialNumber`}
                 placeholder=" "
-                pattern="^ZX[a-zA-Z0-9]{7,}$"
+                pattern="^ZX[0-9a-zA-Z]{5,}$"
+                onInput={(e) => e.target.setCustomValidity('')}
                 onInvalid={(e) =>
                   e.target.setCustomValidity(
                     t('forms.global.inputs.deviceSerialNumber.invalid')
@@ -175,6 +201,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 // eslint-disable-next-line no-octal-escape
                 pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
                 required
+                onInput={(e) => e.target.setCustomValidity('')}
                 onInvalid={(e) =>
                   e.target.setCustomValidity(
                     t('forms.global.inputs.purchaseDate.invalid')
@@ -195,6 +222,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 placeholder=" "
                 minLength={2}
                 required
+                onInput={(e) => e.target.setCustomValidity('')}
                 onInvalid={(e) =>
                   e.target.setCustomValidity(
                     t('forms.global.inputs.name.invalid')
@@ -221,6 +249,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 placeholder=" "
                 minLength={2}
                 required
+                onInput={(e) => e.target.setCustomValidity('')}
                 onInvalid={(e) =>
                   e.target.setCustomValidity(
                     t('forms.global.inputs.surname.invalid')
@@ -245,6 +274,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 placeholder=" "
                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$"
                 required
+                onInput={(e) => e.target.setCustomValidity('')}
                 onInvalid={(e) =>
                   e.target.setCustomValidity(
                     t('forms.global.inputs.emailAddress.invalid')
@@ -265,6 +295,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 placeholder=" "
                 pattern=".[0-9 ]{10,20}"
                 required
+                onInput={(e) => e.target.setCustomValidity('')}
                 onInvalid={(e) =>
                   e.target.setCustomValidity(
                     t('forms.global.inputs.phoneNumber.invalid')
@@ -282,6 +313,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 required
                 id={`${formPrefix}-country`}
                 onChange={HandleChange}
+                onInput={(e) => e.target.setCustomValidity('')}
                 onInvalid={(e) =>
                   e.target.setCustomValidity(
                     t('forms.global.inputs.country.invalid')
@@ -308,6 +340,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 placeholder=" "
                 minLength={2}
                 id={`${formPrefix}-invoiceImage`}
+                onInput={(e) => e.target.setCustomValidity('')}
                 onInvalid={(e) =>
                   e.target.setCustomValidity(
                     t('forms.global.inputs.invoiceImageURL.invalid')
@@ -328,6 +361,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 placeholder=" "
                 minLength={2}
                 id={`${formPrefix}-companyName`}
+                onInput={(e) => e.target.setCustomValidity('')}
                 onInvalid={(e) =>
                   e.target.setCustomValidity(
                     t('forms.global.inputs.companyName.invalid')
@@ -348,6 +382,7 @@ function EditPopup({ formPrefix = 'edit-popup-form' }) {
                 placeholder=" "
                 minLength={2}
                 id={`${formPrefix}-distributorName`}
+                onInput={(e) => e.target.setCustomValidity('')}
                 onInvalid={(e) =>
                   e.target.setCustomValidity(
                     t('forms.global.inputs.distributorName.invalid')

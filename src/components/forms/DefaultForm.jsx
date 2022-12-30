@@ -6,6 +6,19 @@ import Countries from '@/src/data/countryStates.json';
 import firstUpperCase from '@/src/utils/FirstUpperCase';
 import { useAppContext } from '@/src/contexts/AppWrapper';
 
+const getDateSeperator = (date) => {
+  if (date.includes('/')) {
+    return '/';
+  }
+  if (date.includes('-')) {
+    return '-';
+  }
+  if (date.includes('.')) {
+    return '.';
+  }
+  return '';
+};
+
 const getInvoiceImageName = ({
   name,
   surname,
@@ -57,24 +70,37 @@ function DefaultForm({
     });
 
     if (!isBodyValid.includes(false)) {
-      const body = {
-        name: requestBody.name,
-        surname: requestBody.surname,
-        purchaseDate: requestBody.purchaseDate,
-        deviceSerialNumber: requestBody.deviceSerialNumber,
-        emailAddress: requestBody.emailAddress,
-        phoneNumber: requestBody.phoneNumber,
-        country: requestBody.country,
-        invoiceImage: {
-          name: getInvoiceImageName(requestBody),
-          type: invoiceImage?.type,
-          value: invoiceImage?.value,
-        },
-        companyName: requestBody.companyName,
-        distributorName: requestBody.distributorName,
-      };
+      try {
+        const body = {
+          name: requestBody.name,
+          surname: requestBody.surname,
+          purchaseDate: requestBody.purchaseDate,
+          deviceSerialNumber: requestBody.deviceSerialNumber,
+          emailAddress: requestBody.emailAddress,
+          phoneNumber: requestBody.phoneNumber,
+          country: requestBody.country,
+          invoiceImage: {
+            name: getInvoiceImageName(requestBody),
+            type: invoiceImage?.type,
+            value: invoiceImage?.value,
+          },
+          companyName: requestBody.companyName,
+          distributorName: requestBody.distributorName,
+        };
 
-      await onSubmit(body);
+        const dateSeperator = getDateSeperator(body.purchaseDate);
+        const PurchaseDate = body.purchaseDate.split(dateSeperator);
+        if (PurchaseDate[2] > new Date().getFullYear()) {
+          return activateAlertPopup({
+            message: t('popups.global.errors.invalid-date'),
+            status: 'error',
+          });
+        }
+
+        return await onSubmit(body);
+      } catch (error) {
+        return null;
+      }
     }
     return null;
   };
@@ -152,7 +178,8 @@ function DefaultForm({
           className={Classes.input}
           id={`${formPrefix}-deviceSerialNumber`}
           placeholder=" "
-          pattern="^ZX[a-zA-Z0-9]{7,}$"
+          pattern="^ZX[0-9a-zA-Z]{5,}$"
+          onInput={(e) => e.target.setCustomValidity('')}
           onInvalid={(e) =>
             e.target.setCustomValidity(
               t('forms.global.inputs.deviceSerialNumber.invalid')
@@ -180,6 +207,7 @@ function DefaultForm({
           // eslint-disable-next-line no-octal-escape
           pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
           required
+          onInput={(e) => e.target.setCustomValidity('')}
           onInvalid={(e) =>
             e.target.setCustomValidity(
               t('forms.global.inputs.purchaseDate.invalid')
@@ -203,6 +231,7 @@ function DefaultForm({
           placeholder=" "
           minLength={2}
           required
+          onInput={(e) => e.target.setCustomValidity('')}
           onInvalid={(e) =>
             e.target.setCustomValidity(t('forms.global.inputs.name.invalid'))
           }
@@ -226,6 +255,7 @@ function DefaultForm({
           placeholder=" "
           minLength={2}
           required
+          onInput={(e) => e.target.setCustomValidity('')}
           onInvalid={(e) =>
             e.target.setCustomValidity(t('forms.global.inputs.surname.invalid'))
           }
@@ -247,6 +277,7 @@ function DefaultForm({
           placeholder=" "
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           required
+          onInput={(e) => e.target.setCustomValidity('')}
           onInvalid={(e) =>
             e.target.setCustomValidity(
               t('forms.global.inputs.emailAddress.invalid')
@@ -266,6 +297,7 @@ function DefaultForm({
           placeholder=" "
           pattern=".[0-9 ]{10,20}"
           required
+          onInput={(e) => e.target.setCustomValidity('')}
           onInvalid={(e) =>
             e.target.setCustomValidity(
               t('forms.global.inputs.phoneNumber.invalid')
@@ -287,6 +319,7 @@ function DefaultForm({
           defaultValue=""
           id={`${formPrefix}-country`}
           onChange={HandleChange}
+          onInput={(e) => e.target.setCustomValidity('')}
           onInvalid={(e) =>
             e.target.setCustomValidity(t('forms.global.inputs.country.invalid'))
           }
@@ -343,6 +376,7 @@ function DefaultForm({
           placeholder=" "
           minLength={2}
           id={`${formPrefix}-companyName`}
+          onInput={(e) => e.target.setCustomValidity('')}
           onInvalid={(e) =>
             e.target.setCustomValidity(
               t('forms.global.inputs.companyName.invalid')
@@ -362,6 +396,7 @@ function DefaultForm({
           placeholder=" "
           minLength={2}
           id={`${formPrefix}-distributorName`}
+          onInput={(e) => e.target.setCustomValidity('')}
           onInvalid={(e) =>
             e.target.setCustomValidity(
               t('forms.global.inputs.distributorName.invalid')
