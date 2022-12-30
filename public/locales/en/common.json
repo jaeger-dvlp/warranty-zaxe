@@ -131,6 +131,7 @@
       },
       "errors": {
         "invalid-field": "Invalid field.",
+        "invalid-date": "Invalid date.",
         "error-occurred": "An error occurred."
       },
       "buttons": {

@@ -131,6 +131,7 @@
       },
       "errors": {
         "invalid-field": "Geçersiz Alan.",
+        "invalid-date": "Geçersiz Tarih.",
         "error-occurred": "Beklenmedik bir hata oluştu."
       },
       "buttons": {
