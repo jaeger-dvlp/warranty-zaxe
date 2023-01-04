@@ -10,10 +10,10 @@
     "name": "JAEGER"
   },
   "scripts": {
-    "dev": "NODE_ENV=development next dev",
-    "dev:local": "NODE_ENV=development NEXT_PUBLIC_API_URL=http://localhost:3005/v1/ next dev",
+    "dev": "cross-env NODE_ENV=development next dev",
+    "dev:local": "cross-env NODE_ENV=development NEXT_PUBLIC_API_URL=http://localhost:3005/v1/ next dev",
     "build": "next build ",
-    "start": "NODE_ENV=production next start",
+    "start": "cross-env NODE_ENV=production next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.8",
     "axios": "^1.2.1",
+    "cross-env": "^7.0.3",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "file-loader": "^6.2.0",
